@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Token {
+  id            String         @id @default(uuid()) @map("tokenId")
+  tokenName     String         @unique
+  tokenDecimals Int
+  tokenSymbol   String
+  logoUrl       String?
+  addresses     TokenAddress[]
+}
+
+model ChainRef {
+  id           String         @id @map("chainId")
+  networkName  String?
+  tokenAddresses TokenAddress[]
+  pools        Pool[]
+}
+
+model Pool {
+  poolAddress   String
+  token0Address String
+  token1Address String
+  dexName       String
+  chainId       String
+  
+  chain         ChainRef      @relation(fields: [chainId], references: [id])
+  token0        TokenAddress  @relation("Token0AddressToPools", fields: [token0Address, chainId], references: [tokenAddress, chainId])
+  token1        TokenAddress  @relation("Token1AddressToPools", fields: [token1Address, chainId], references: [tokenAddress, chainId])
+
+  @@id([poolAddress, chainId])
+}
+
+model TokenAddress {
+  tokenAddress String
+  chainId      String
+  tokenId      String
+  
+  token        Token          @relation(fields: [tokenId], references: [id])
+  chain        ChainRef       @relation(fields: [chainId], references: [id])
+  
+  // Add these two fields to replace the single pools relation
+  poolsAsToken0 Pool[]        @relation("Token0AddressToPools")
+  poolsAsToken1 Pool[]        @relation("Token1AddressToPools")
+
+  @@id([tokenAddress, chainId])
+}
