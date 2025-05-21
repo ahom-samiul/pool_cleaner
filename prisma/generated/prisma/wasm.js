@@ -128,6 +128,12 @@ exports.Prisma.TokenScalarFieldEnum = {
   logoUrl: 'logoUrl'
 };
 
+exports.Prisma.TokenAddressScalarFieldEnum = {
+  tokenAddress: 'tokenAddress',
+  chainId: 'chainId',
+  tokenId: 'tokenId'
+};
+
 exports.Prisma.ChainRefScalarFieldEnum = {
   id: 'id',
   networkName: 'networkName'
@@ -139,12 +145,6 @@ exports.Prisma.PoolScalarFieldEnum = {
   token1Address: 'token1Address',
   dexName: 'dexName',
   chainId: 'chainId'
-};
-
-exports.Prisma.TokenAddressScalarFieldEnum = {
-  tokenAddress: 'tokenAddress',
-  chainId: 'chainId',
-  tokenId: 'tokenId'
 };
 
 exports.Prisma.SortOrder = {
@@ -165,9 +165,9 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Token: 'Token',
+  TokenAddress: 'TokenAddress',
   ChainRef: 'ChainRef',
-  Pool: 'Pool',
-  TokenAddress: 'TokenAddress'
+  Pool: 'Pool'
 };
 
 /**

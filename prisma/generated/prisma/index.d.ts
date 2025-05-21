@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Token = $Result.DefaultSelection<Prisma.$TokenPayload>
 /**
+ * Model TokenAddress
+ * 
+ */
+export type TokenAddress = $Result.DefaultSelection<Prisma.$TokenAddressPayload>
+/**
  * Model ChainRef
  * 
  */
@@ -28,11 +33,6 @@ export type ChainRef = $Result.DefaultSelection<Prisma.$ChainRefPayload>
  * 
  */
 export type Pool = $Result.DefaultSelection<Prisma.$PoolPayload>
-/**
- * Model TokenAddress
- * 
- */
-export type TokenAddress = $Result.DefaultSelection<Prisma.$TokenAddressPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -170,6 +170,16 @@ export class PrismaClient<
   get token(): Prisma.TokenDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.tokenAddress`: Exposes CRUD operations for the **TokenAddress** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TokenAddresses
+    * const tokenAddresses = await prisma.tokenAddress.findMany()
+    * ```
+    */
+  get tokenAddress(): Prisma.TokenAddressDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.chainRef`: Exposes CRUD operations for the **ChainRef** model.
     * Example usage:
     * ```ts
@@ -188,16 +198,6 @@ export class PrismaClient<
     * ```
     */
   get pool(): Prisma.PoolDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.tokenAddress`: Exposes CRUD operations for the **TokenAddress** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TokenAddresses
-    * const tokenAddresses = await prisma.tokenAddress.findMany()
-    * ```
-    */
-  get tokenAddress(): Prisma.TokenAddressDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -639,9 +639,9 @@ export namespace Prisma {
 
   export const ModelName: {
     Token: 'Token',
+    TokenAddress: 'TokenAddress',
     ChainRef: 'ChainRef',
-    Pool: 'Pool',
-    TokenAddress: 'TokenAddress'
+    Pool: 'Pool'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "token" | "chainRef" | "pool" | "tokenAddress"
+      modelProps: "token" | "tokenAddress" | "chainRef" | "pool"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -735,6 +735,80 @@ export namespace Prisma {
           count: {
             args: Prisma.TokenCountArgs<ExtArgs>
             result: $Utils.Optional<TokenCountAggregateOutputType> | number
+          }
+        }
+      }
+      TokenAddress: {
+        payload: Prisma.$TokenAddressPayload<ExtArgs>
+        fields: Prisma.TokenAddressFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TokenAddressFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TokenAddressFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
+          }
+          findFirst: {
+            args: Prisma.TokenAddressFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TokenAddressFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
+          }
+          findMany: {
+            args: Prisma.TokenAddressFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>[]
+          }
+          create: {
+            args: Prisma.TokenAddressCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
+          }
+          createMany: {
+            args: Prisma.TokenAddressCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TokenAddressCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>[]
+          }
+          delete: {
+            args: Prisma.TokenAddressDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
+          }
+          update: {
+            args: Prisma.TokenAddressUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
+          }
+          deleteMany: {
+            args: Prisma.TokenAddressDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TokenAddressUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TokenAddressUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>[]
+          }
+          upsert: {
+            args: Prisma.TokenAddressUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
+          }
+          aggregate: {
+            args: Prisma.TokenAddressAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTokenAddress>
+          }
+          groupBy: {
+            args: Prisma.TokenAddressGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TokenAddressGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TokenAddressCountArgs<ExtArgs>
+            result: $Utils.Optional<TokenAddressCountAggregateOutputType> | number
           }
         }
       }
@@ -886,80 +960,6 @@ export namespace Prisma {
           }
         }
       }
-      TokenAddress: {
-        payload: Prisma.$TokenAddressPayload<ExtArgs>
-        fields: Prisma.TokenAddressFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TokenAddressFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TokenAddressFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
-          }
-          findFirst: {
-            args: Prisma.TokenAddressFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TokenAddressFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
-          }
-          findMany: {
-            args: Prisma.TokenAddressFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>[]
-          }
-          create: {
-            args: Prisma.TokenAddressCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
-          }
-          createMany: {
-            args: Prisma.TokenAddressCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TokenAddressCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>[]
-          }
-          delete: {
-            args: Prisma.TokenAddressDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
-          }
-          update: {
-            args: Prisma.TokenAddressUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
-          }
-          deleteMany: {
-            args: Prisma.TokenAddressDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TokenAddressUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TokenAddressUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>[]
-          }
-          upsert: {
-            args: Prisma.TokenAddressUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TokenAddressPayload>
-          }
-          aggregate: {
-            args: Prisma.TokenAddressAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTokenAddress>
-          }
-          groupBy: {
-            args: Prisma.TokenAddressGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TokenAddressGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TokenAddressCountArgs<ExtArgs>
-            result: $Utils.Optional<TokenAddressCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1045,9 +1045,9 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     token?: TokenOmit
+    tokenAddress?: TokenAddressOmit
     chainRef?: ChainRefOmit
     pool?: PoolOmit
-    tokenAddress?: TokenAddressOmit
   }
 
   /* Types for Logging */
@@ -1169,46 +1169,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type ChainRefCountOutputType
-   */
-
-  export type ChainRefCountOutputType = {
-    tokenAddresses: number
-    pools: number
-  }
-
-  export type ChainRefCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tokenAddresses?: boolean | ChainRefCountOutputTypeCountTokenAddressesArgs
-    pools?: boolean | ChainRefCountOutputTypeCountPoolsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ChainRefCountOutputType without action
-   */
-  export type ChainRefCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ChainRefCountOutputType
-     */
-    select?: ChainRefCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ChainRefCountOutputType without action
-   */
-  export type ChainRefCountOutputTypeCountTokenAddressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TokenAddressWhereInput
-  }
-
-  /**
-   * ChainRefCountOutputType without action
-   */
-  export type ChainRefCountOutputTypeCountPoolsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PoolWhereInput
-  }
-
-
-  /**
    * Count Type TokenAddressCountOutputType
    */
 
@@ -1244,6 +1204,46 @@ export namespace Prisma {
    * TokenAddressCountOutputType without action
    */
   export type TokenAddressCountOutputTypeCountPoolsAsToken1Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PoolWhereInput
+  }
+
+
+  /**
+   * Count Type ChainRefCountOutputType
+   */
+
+  export type ChainRefCountOutputType = {
+    tokenAddresses: number
+    pools: number
+  }
+
+  export type ChainRefCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tokenAddresses?: boolean | ChainRefCountOutputTypeCountTokenAddressesArgs
+    pools?: boolean | ChainRefCountOutputTypeCountPoolsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ChainRefCountOutputType without action
+   */
+  export type ChainRefCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChainRefCountOutputType
+     */
+    select?: ChainRefCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ChainRefCountOutputType without action
+   */
+  export type ChainRefCountOutputTypeCountTokenAddressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TokenAddressWhereInput
+  }
+
+  /**
+   * ChainRefCountOutputType without action
+   */
+  export type ChainRefCountOutputTypeCountPoolsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PoolWhereInput
   }
 
@@ -2353,6 +2353,1104 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TokenInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TokenAddress
+   */
+
+  export type AggregateTokenAddress = {
+    _count: TokenAddressCountAggregateOutputType | null
+    _min: TokenAddressMinAggregateOutputType | null
+    _max: TokenAddressMaxAggregateOutputType | null
+  }
+
+  export type TokenAddressMinAggregateOutputType = {
+    tokenAddress: string | null
+    chainId: string | null
+    tokenId: string | null
+  }
+
+  export type TokenAddressMaxAggregateOutputType = {
+    tokenAddress: string | null
+    chainId: string | null
+    tokenId: string | null
+  }
+
+  export type TokenAddressCountAggregateOutputType = {
+    tokenAddress: number
+    chainId: number
+    tokenId: number
+    _all: number
+  }
+
+
+  export type TokenAddressMinAggregateInputType = {
+    tokenAddress?: true
+    chainId?: true
+    tokenId?: true
+  }
+
+  export type TokenAddressMaxAggregateInputType = {
+    tokenAddress?: true
+    chainId?: true
+    tokenId?: true
+  }
+
+  export type TokenAddressCountAggregateInputType = {
+    tokenAddress?: true
+    chainId?: true
+    tokenId?: true
+    _all?: true
+  }
+
+  export type TokenAddressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TokenAddress to aggregate.
+     */
+    where?: TokenAddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TokenAddresses to fetch.
+     */
+    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TokenAddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TokenAddresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TokenAddresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TokenAddresses
+    **/
+    _count?: true | TokenAddressCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TokenAddressMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TokenAddressMaxAggregateInputType
+  }
+
+  export type GetTokenAddressAggregateType<T extends TokenAddressAggregateArgs> = {
+        [P in keyof T & keyof AggregateTokenAddress]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTokenAddress[P]>
+      : GetScalarType<T[P], AggregateTokenAddress[P]>
+  }
+
+
+
+
+  export type TokenAddressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TokenAddressWhereInput
+    orderBy?: TokenAddressOrderByWithAggregationInput | TokenAddressOrderByWithAggregationInput[]
+    by: TokenAddressScalarFieldEnum[] | TokenAddressScalarFieldEnum
+    having?: TokenAddressScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TokenAddressCountAggregateInputType | true
+    _min?: TokenAddressMinAggregateInputType
+    _max?: TokenAddressMaxAggregateInputType
+  }
+
+  export type TokenAddressGroupByOutputType = {
+    tokenAddress: string
+    chainId: string
+    tokenId: string
+    _count: TokenAddressCountAggregateOutputType | null
+    _min: TokenAddressMinAggregateOutputType | null
+    _max: TokenAddressMaxAggregateOutputType | null
+  }
+
+  type GetTokenAddressGroupByPayload<T extends TokenAddressGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TokenAddressGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TokenAddressGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TokenAddressGroupByOutputType[P]>
+            : GetScalarType<T[P], TokenAddressGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TokenAddressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tokenAddress?: boolean
+    chainId?: boolean
+    tokenId?: boolean
+    token?: boolean | TokenDefaultArgs<ExtArgs>
+    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
+    poolsAsToken0?: boolean | TokenAddress$poolsAsToken0Args<ExtArgs>
+    poolsAsToken1?: boolean | TokenAddress$poolsAsToken1Args<ExtArgs>
+    _count?: boolean | TokenAddressCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tokenAddress"]>
+
+  export type TokenAddressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tokenAddress?: boolean
+    chainId?: boolean
+    tokenId?: boolean
+    token?: boolean | TokenDefaultArgs<ExtArgs>
+    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tokenAddress"]>
+
+  export type TokenAddressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tokenAddress?: boolean
+    chainId?: boolean
+    tokenId?: boolean
+    token?: boolean | TokenDefaultArgs<ExtArgs>
+    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tokenAddress"]>
+
+  export type TokenAddressSelectScalar = {
+    tokenAddress?: boolean
+    chainId?: boolean
+    tokenId?: boolean
+  }
+
+  export type TokenAddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tokenAddress" | "chainId" | "tokenId", ExtArgs["result"]["tokenAddress"]>
+  export type TokenAddressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    token?: boolean | TokenDefaultArgs<ExtArgs>
+    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
+    poolsAsToken0?: boolean | TokenAddress$poolsAsToken0Args<ExtArgs>
+    poolsAsToken1?: boolean | TokenAddress$poolsAsToken1Args<ExtArgs>
+    _count?: boolean | TokenAddressCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TokenAddressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    token?: boolean | TokenDefaultArgs<ExtArgs>
+    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
+  }
+  export type TokenAddressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    token?: boolean | TokenDefaultArgs<ExtArgs>
+    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
+  }
+
+  export type $TokenAddressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TokenAddress"
+    objects: {
+      token: Prisma.$TokenPayload<ExtArgs>
+      chain: Prisma.$ChainRefPayload<ExtArgs>
+      poolsAsToken0: Prisma.$PoolPayload<ExtArgs>[]
+      poolsAsToken1: Prisma.$PoolPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tokenAddress: string
+      chainId: string
+      tokenId: string
+    }, ExtArgs["result"]["tokenAddress"]>
+    composites: {}
+  }
+
+  type TokenAddressGetPayload<S extends boolean | null | undefined | TokenAddressDefaultArgs> = $Result.GetResult<Prisma.$TokenAddressPayload, S>
+
+  type TokenAddressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TokenAddressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TokenAddressCountAggregateInputType | true
+    }
+
+  export interface TokenAddressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TokenAddress'], meta: { name: 'TokenAddress' } }
+    /**
+     * Find zero or one TokenAddress that matches the filter.
+     * @param {TokenAddressFindUniqueArgs} args - Arguments to find a TokenAddress
+     * @example
+     * // Get one TokenAddress
+     * const tokenAddress = await prisma.tokenAddress.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TokenAddressFindUniqueArgs>(args: SelectSubset<T, TokenAddressFindUniqueArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TokenAddress that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TokenAddressFindUniqueOrThrowArgs} args - Arguments to find a TokenAddress
+     * @example
+     * // Get one TokenAddress
+     * const tokenAddress = await prisma.tokenAddress.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TokenAddressFindUniqueOrThrowArgs>(args: SelectSubset<T, TokenAddressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TokenAddress that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TokenAddressFindFirstArgs} args - Arguments to find a TokenAddress
+     * @example
+     * // Get one TokenAddress
+     * const tokenAddress = await prisma.tokenAddress.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TokenAddressFindFirstArgs>(args?: SelectSubset<T, TokenAddressFindFirstArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TokenAddress that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TokenAddressFindFirstOrThrowArgs} args - Arguments to find a TokenAddress
+     * @example
+     * // Get one TokenAddress
+     * const tokenAddress = await prisma.tokenAddress.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TokenAddressFindFirstOrThrowArgs>(args?: SelectSubset<T, TokenAddressFindFirstOrThrowArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TokenAddresses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TokenAddressFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TokenAddresses
+     * const tokenAddresses = await prisma.tokenAddress.findMany()
+     * 
+     * // Get first 10 TokenAddresses
+     * const tokenAddresses = await prisma.tokenAddress.findMany({ take: 10 })
+     * 
+     * // Only select the `tokenAddress`
+     * const tokenAddressWithTokenAddressOnly = await prisma.tokenAddress.findMany({ select: { tokenAddress: true } })
+     * 
+     */
+    findMany<T extends TokenAddressFindManyArgs>(args?: SelectSubset<T, TokenAddressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TokenAddress.
+     * @param {TokenAddressCreateArgs} args - Arguments to create a TokenAddress.
+     * @example
+     * // Create one TokenAddress
+     * const TokenAddress = await prisma.tokenAddress.create({
+     *   data: {
+     *     // ... data to create a TokenAddress
+     *   }
+     * })
+     * 
+     */
+    create<T extends TokenAddressCreateArgs>(args: SelectSubset<T, TokenAddressCreateArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TokenAddresses.
+     * @param {TokenAddressCreateManyArgs} args - Arguments to create many TokenAddresses.
+     * @example
+     * // Create many TokenAddresses
+     * const tokenAddress = await prisma.tokenAddress.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TokenAddressCreateManyArgs>(args?: SelectSubset<T, TokenAddressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TokenAddresses and returns the data saved in the database.
+     * @param {TokenAddressCreateManyAndReturnArgs} args - Arguments to create many TokenAddresses.
+     * @example
+     * // Create many TokenAddresses
+     * const tokenAddress = await prisma.tokenAddress.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TokenAddresses and only return the `tokenAddress`
+     * const tokenAddressWithTokenAddressOnly = await prisma.tokenAddress.createManyAndReturn({
+     *   select: { tokenAddress: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TokenAddressCreateManyAndReturnArgs>(args?: SelectSubset<T, TokenAddressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TokenAddress.
+     * @param {TokenAddressDeleteArgs} args - Arguments to delete one TokenAddress.
+     * @example
+     * // Delete one TokenAddress
+     * const TokenAddress = await prisma.tokenAddress.delete({
+     *   where: {
+     *     // ... filter to delete one TokenAddress
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TokenAddressDeleteArgs>(args: SelectSubset<T, TokenAddressDeleteArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TokenAddress.
+     * @param {TokenAddressUpdateArgs} args - Arguments to update one TokenAddress.
+     * @example
+     * // Update one TokenAddress
+     * const tokenAddress = await prisma.tokenAddress.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TokenAddressUpdateArgs>(args: SelectSubset<T, TokenAddressUpdateArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TokenAddresses.
+     * @param {TokenAddressDeleteManyArgs} args - Arguments to filter TokenAddresses to delete.
+     * @example
+     * // Delete a few TokenAddresses
+     * const { count } = await prisma.tokenAddress.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TokenAddressDeleteManyArgs>(args?: SelectSubset<T, TokenAddressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TokenAddresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TokenAddressUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TokenAddresses
+     * const tokenAddress = await prisma.tokenAddress.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TokenAddressUpdateManyArgs>(args: SelectSubset<T, TokenAddressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TokenAddresses and returns the data updated in the database.
+     * @param {TokenAddressUpdateManyAndReturnArgs} args - Arguments to update many TokenAddresses.
+     * @example
+     * // Update many TokenAddresses
+     * const tokenAddress = await prisma.tokenAddress.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TokenAddresses and only return the `tokenAddress`
+     * const tokenAddressWithTokenAddressOnly = await prisma.tokenAddress.updateManyAndReturn({
+     *   select: { tokenAddress: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TokenAddressUpdateManyAndReturnArgs>(args: SelectSubset<T, TokenAddressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TokenAddress.
+     * @param {TokenAddressUpsertArgs} args - Arguments to update or create a TokenAddress.
+     * @example
+     * // Update or create a TokenAddress
+     * const tokenAddress = await prisma.tokenAddress.upsert({
+     *   create: {
+     *     // ... data to create a TokenAddress
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TokenAddress we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TokenAddressUpsertArgs>(args: SelectSubset<T, TokenAddressUpsertArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TokenAddresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TokenAddressCountArgs} args - Arguments to filter TokenAddresses to count.
+     * @example
+     * // Count the number of TokenAddresses
+     * const count = await prisma.tokenAddress.count({
+     *   where: {
+     *     // ... the filter for the TokenAddresses we want to count
+     *   }
+     * })
+    **/
+    count<T extends TokenAddressCountArgs>(
+      args?: Subset<T, TokenAddressCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TokenAddressCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TokenAddress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TokenAddressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TokenAddressAggregateArgs>(args: Subset<T, TokenAddressAggregateArgs>): Prisma.PrismaPromise<GetTokenAddressAggregateType<T>>
+
+    /**
+     * Group by TokenAddress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TokenAddressGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TokenAddressGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TokenAddressGroupByArgs['orderBy'] }
+        : { orderBy?: TokenAddressGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TokenAddressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTokenAddressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TokenAddress model
+   */
+  readonly fields: TokenAddressFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TokenAddress.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TokenAddressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    token<T extends TokenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TokenDefaultArgs<ExtArgs>>): Prisma__TokenClient<$Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    chain<T extends ChainRefDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChainRefDefaultArgs<ExtArgs>>): Prisma__ChainRefClient<$Result.GetResult<Prisma.$ChainRefPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    poolsAsToken0<T extends TokenAddress$poolsAsToken0Args<ExtArgs> = {}>(args?: Subset<T, TokenAddress$poolsAsToken0Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    poolsAsToken1<T extends TokenAddress$poolsAsToken1Args<ExtArgs> = {}>(args?: Subset<T, TokenAddress$poolsAsToken1Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TokenAddress model
+   */
+  interface TokenAddressFieldRefs {
+    readonly tokenAddress: FieldRef<"TokenAddress", 'String'>
+    readonly chainId: FieldRef<"TokenAddress", 'String'>
+    readonly tokenId: FieldRef<"TokenAddress", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TokenAddress findUnique
+   */
+  export type TokenAddressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * Filter, which TokenAddress to fetch.
+     */
+    where: TokenAddressWhereUniqueInput
+  }
+
+  /**
+   * TokenAddress findUniqueOrThrow
+   */
+  export type TokenAddressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * Filter, which TokenAddress to fetch.
+     */
+    where: TokenAddressWhereUniqueInput
+  }
+
+  /**
+   * TokenAddress findFirst
+   */
+  export type TokenAddressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * Filter, which TokenAddress to fetch.
+     */
+    where?: TokenAddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TokenAddresses to fetch.
+     */
+    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TokenAddresses.
+     */
+    cursor?: TokenAddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TokenAddresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TokenAddresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TokenAddresses.
+     */
+    distinct?: TokenAddressScalarFieldEnum | TokenAddressScalarFieldEnum[]
+  }
+
+  /**
+   * TokenAddress findFirstOrThrow
+   */
+  export type TokenAddressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * Filter, which TokenAddress to fetch.
+     */
+    where?: TokenAddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TokenAddresses to fetch.
+     */
+    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TokenAddresses.
+     */
+    cursor?: TokenAddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TokenAddresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TokenAddresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TokenAddresses.
+     */
+    distinct?: TokenAddressScalarFieldEnum | TokenAddressScalarFieldEnum[]
+  }
+
+  /**
+   * TokenAddress findMany
+   */
+  export type TokenAddressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * Filter, which TokenAddresses to fetch.
+     */
+    where?: TokenAddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TokenAddresses to fetch.
+     */
+    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TokenAddresses.
+     */
+    cursor?: TokenAddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TokenAddresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TokenAddresses.
+     */
+    skip?: number
+    distinct?: TokenAddressScalarFieldEnum | TokenAddressScalarFieldEnum[]
+  }
+
+  /**
+   * TokenAddress create
+   */
+  export type TokenAddressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TokenAddress.
+     */
+    data: XOR<TokenAddressCreateInput, TokenAddressUncheckedCreateInput>
+  }
+
+  /**
+   * TokenAddress createMany
+   */
+  export type TokenAddressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TokenAddresses.
+     */
+    data: TokenAddressCreateManyInput | TokenAddressCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TokenAddress createManyAndReturn
+   */
+  export type TokenAddressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * The data used to create many TokenAddresses.
+     */
+    data: TokenAddressCreateManyInput | TokenAddressCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TokenAddress update
+   */
+  export type TokenAddressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TokenAddress.
+     */
+    data: XOR<TokenAddressUpdateInput, TokenAddressUncheckedUpdateInput>
+    /**
+     * Choose, which TokenAddress to update.
+     */
+    where: TokenAddressWhereUniqueInput
+  }
+
+  /**
+   * TokenAddress updateMany
+   */
+  export type TokenAddressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TokenAddresses.
+     */
+    data: XOR<TokenAddressUpdateManyMutationInput, TokenAddressUncheckedUpdateManyInput>
+    /**
+     * Filter which TokenAddresses to update
+     */
+    where?: TokenAddressWhereInput
+    /**
+     * Limit how many TokenAddresses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TokenAddress updateManyAndReturn
+   */
+  export type TokenAddressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * The data used to update TokenAddresses.
+     */
+    data: XOR<TokenAddressUpdateManyMutationInput, TokenAddressUncheckedUpdateManyInput>
+    /**
+     * Filter which TokenAddresses to update
+     */
+    where?: TokenAddressWhereInput
+    /**
+     * Limit how many TokenAddresses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TokenAddress upsert
+   */
+  export type TokenAddressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TokenAddress to update in case it exists.
+     */
+    where: TokenAddressWhereUniqueInput
+    /**
+     * In case the TokenAddress found by the `where` argument doesn't exist, create a new TokenAddress with this data.
+     */
+    create: XOR<TokenAddressCreateInput, TokenAddressUncheckedCreateInput>
+    /**
+     * In case the TokenAddress was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TokenAddressUpdateInput, TokenAddressUncheckedUpdateInput>
+  }
+
+  /**
+   * TokenAddress delete
+   */
+  export type TokenAddressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
+    /**
+     * Filter which TokenAddress to delete.
+     */
+    where: TokenAddressWhereUniqueInput
+  }
+
+  /**
+   * TokenAddress deleteMany
+   */
+  export type TokenAddressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TokenAddresses to delete
+     */
+    where?: TokenAddressWhereInput
+    /**
+     * Limit how many TokenAddresses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TokenAddress.poolsAsToken0
+   */
+  export type TokenAddress$poolsAsToken0Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pool
+     */
+    select?: PoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pool
+     */
+    omit?: PoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PoolInclude<ExtArgs> | null
+    where?: PoolWhereInput
+    orderBy?: PoolOrderByWithRelationInput | PoolOrderByWithRelationInput[]
+    cursor?: PoolWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PoolScalarFieldEnum | PoolScalarFieldEnum[]
+  }
+
+  /**
+   * TokenAddress.poolsAsToken1
+   */
+  export type TokenAddress$poolsAsToken1Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pool
+     */
+    select?: PoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pool
+     */
+    omit?: PoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PoolInclude<ExtArgs> | null
+    where?: PoolWhereInput
+    orderBy?: PoolOrderByWithRelationInput | PoolOrderByWithRelationInput[]
+    cursor?: PoolWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PoolScalarFieldEnum | PoolScalarFieldEnum[]
+  }
+
+  /**
+   * TokenAddress without action
+   */
+  export type TokenAddressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TokenAddress
+     */
+    select?: TokenAddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TokenAddress
+     */
+    omit?: TokenAddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TokenAddressInclude<ExtArgs> | null
   }
 
 
@@ -4490,1104 +5588,6 @@ export namespace Prisma {
 
 
   /**
-   * Model TokenAddress
-   */
-
-  export type AggregateTokenAddress = {
-    _count: TokenAddressCountAggregateOutputType | null
-    _min: TokenAddressMinAggregateOutputType | null
-    _max: TokenAddressMaxAggregateOutputType | null
-  }
-
-  export type TokenAddressMinAggregateOutputType = {
-    tokenAddress: string | null
-    chainId: string | null
-    tokenId: string | null
-  }
-
-  export type TokenAddressMaxAggregateOutputType = {
-    tokenAddress: string | null
-    chainId: string | null
-    tokenId: string | null
-  }
-
-  export type TokenAddressCountAggregateOutputType = {
-    tokenAddress: number
-    chainId: number
-    tokenId: number
-    _all: number
-  }
-
-
-  export type TokenAddressMinAggregateInputType = {
-    tokenAddress?: true
-    chainId?: true
-    tokenId?: true
-  }
-
-  export type TokenAddressMaxAggregateInputType = {
-    tokenAddress?: true
-    chainId?: true
-    tokenId?: true
-  }
-
-  export type TokenAddressCountAggregateInputType = {
-    tokenAddress?: true
-    chainId?: true
-    tokenId?: true
-    _all?: true
-  }
-
-  export type TokenAddressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TokenAddress to aggregate.
-     */
-    where?: TokenAddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TokenAddresses to fetch.
-     */
-    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TokenAddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TokenAddresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TokenAddresses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TokenAddresses
-    **/
-    _count?: true | TokenAddressCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TokenAddressMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TokenAddressMaxAggregateInputType
-  }
-
-  export type GetTokenAddressAggregateType<T extends TokenAddressAggregateArgs> = {
-        [P in keyof T & keyof AggregateTokenAddress]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTokenAddress[P]>
-      : GetScalarType<T[P], AggregateTokenAddress[P]>
-  }
-
-
-
-
-  export type TokenAddressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TokenAddressWhereInput
-    orderBy?: TokenAddressOrderByWithAggregationInput | TokenAddressOrderByWithAggregationInput[]
-    by: TokenAddressScalarFieldEnum[] | TokenAddressScalarFieldEnum
-    having?: TokenAddressScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TokenAddressCountAggregateInputType | true
-    _min?: TokenAddressMinAggregateInputType
-    _max?: TokenAddressMaxAggregateInputType
-  }
-
-  export type TokenAddressGroupByOutputType = {
-    tokenAddress: string
-    chainId: string
-    tokenId: string
-    _count: TokenAddressCountAggregateOutputType | null
-    _min: TokenAddressMinAggregateOutputType | null
-    _max: TokenAddressMaxAggregateOutputType | null
-  }
-
-  type GetTokenAddressGroupByPayload<T extends TokenAddressGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TokenAddressGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TokenAddressGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TokenAddressGroupByOutputType[P]>
-            : GetScalarType<T[P], TokenAddressGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TokenAddressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    tokenAddress?: boolean
-    chainId?: boolean
-    tokenId?: boolean
-    token?: boolean | TokenDefaultArgs<ExtArgs>
-    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
-    poolsAsToken0?: boolean | TokenAddress$poolsAsToken0Args<ExtArgs>
-    poolsAsToken1?: boolean | TokenAddress$poolsAsToken1Args<ExtArgs>
-    _count?: boolean | TokenAddressCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tokenAddress"]>
-
-  export type TokenAddressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    tokenAddress?: boolean
-    chainId?: boolean
-    tokenId?: boolean
-    token?: boolean | TokenDefaultArgs<ExtArgs>
-    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tokenAddress"]>
-
-  export type TokenAddressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    tokenAddress?: boolean
-    chainId?: boolean
-    tokenId?: boolean
-    token?: boolean | TokenDefaultArgs<ExtArgs>
-    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tokenAddress"]>
-
-  export type TokenAddressSelectScalar = {
-    tokenAddress?: boolean
-    chainId?: boolean
-    tokenId?: boolean
-  }
-
-  export type TokenAddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tokenAddress" | "chainId" | "tokenId", ExtArgs["result"]["tokenAddress"]>
-  export type TokenAddressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    token?: boolean | TokenDefaultArgs<ExtArgs>
-    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
-    poolsAsToken0?: boolean | TokenAddress$poolsAsToken0Args<ExtArgs>
-    poolsAsToken1?: boolean | TokenAddress$poolsAsToken1Args<ExtArgs>
-    _count?: boolean | TokenAddressCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type TokenAddressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    token?: boolean | TokenDefaultArgs<ExtArgs>
-    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
-  }
-  export type TokenAddressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    token?: boolean | TokenDefaultArgs<ExtArgs>
-    chain?: boolean | ChainRefDefaultArgs<ExtArgs>
-  }
-
-  export type $TokenAddressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TokenAddress"
-    objects: {
-      token: Prisma.$TokenPayload<ExtArgs>
-      chain: Prisma.$ChainRefPayload<ExtArgs>
-      poolsAsToken0: Prisma.$PoolPayload<ExtArgs>[]
-      poolsAsToken1: Prisma.$PoolPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      tokenAddress: string
-      chainId: string
-      tokenId: string
-    }, ExtArgs["result"]["tokenAddress"]>
-    composites: {}
-  }
-
-  type TokenAddressGetPayload<S extends boolean | null | undefined | TokenAddressDefaultArgs> = $Result.GetResult<Prisma.$TokenAddressPayload, S>
-
-  type TokenAddressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TokenAddressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TokenAddressCountAggregateInputType | true
-    }
-
-  export interface TokenAddressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TokenAddress'], meta: { name: 'TokenAddress' } }
-    /**
-     * Find zero or one TokenAddress that matches the filter.
-     * @param {TokenAddressFindUniqueArgs} args - Arguments to find a TokenAddress
-     * @example
-     * // Get one TokenAddress
-     * const tokenAddress = await prisma.tokenAddress.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TokenAddressFindUniqueArgs>(args: SelectSubset<T, TokenAddressFindUniqueArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TokenAddress that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TokenAddressFindUniqueOrThrowArgs} args - Arguments to find a TokenAddress
-     * @example
-     * // Get one TokenAddress
-     * const tokenAddress = await prisma.tokenAddress.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TokenAddressFindUniqueOrThrowArgs>(args: SelectSubset<T, TokenAddressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TokenAddress that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TokenAddressFindFirstArgs} args - Arguments to find a TokenAddress
-     * @example
-     * // Get one TokenAddress
-     * const tokenAddress = await prisma.tokenAddress.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TokenAddressFindFirstArgs>(args?: SelectSubset<T, TokenAddressFindFirstArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TokenAddress that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TokenAddressFindFirstOrThrowArgs} args - Arguments to find a TokenAddress
-     * @example
-     * // Get one TokenAddress
-     * const tokenAddress = await prisma.tokenAddress.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TokenAddressFindFirstOrThrowArgs>(args?: SelectSubset<T, TokenAddressFindFirstOrThrowArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TokenAddresses that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TokenAddressFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TokenAddresses
-     * const tokenAddresses = await prisma.tokenAddress.findMany()
-     * 
-     * // Get first 10 TokenAddresses
-     * const tokenAddresses = await prisma.tokenAddress.findMany({ take: 10 })
-     * 
-     * // Only select the `tokenAddress`
-     * const tokenAddressWithTokenAddressOnly = await prisma.tokenAddress.findMany({ select: { tokenAddress: true } })
-     * 
-     */
-    findMany<T extends TokenAddressFindManyArgs>(args?: SelectSubset<T, TokenAddressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TokenAddress.
-     * @param {TokenAddressCreateArgs} args - Arguments to create a TokenAddress.
-     * @example
-     * // Create one TokenAddress
-     * const TokenAddress = await prisma.tokenAddress.create({
-     *   data: {
-     *     // ... data to create a TokenAddress
-     *   }
-     * })
-     * 
-     */
-    create<T extends TokenAddressCreateArgs>(args: SelectSubset<T, TokenAddressCreateArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TokenAddresses.
-     * @param {TokenAddressCreateManyArgs} args - Arguments to create many TokenAddresses.
-     * @example
-     * // Create many TokenAddresses
-     * const tokenAddress = await prisma.tokenAddress.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TokenAddressCreateManyArgs>(args?: SelectSubset<T, TokenAddressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TokenAddresses and returns the data saved in the database.
-     * @param {TokenAddressCreateManyAndReturnArgs} args - Arguments to create many TokenAddresses.
-     * @example
-     * // Create many TokenAddresses
-     * const tokenAddress = await prisma.tokenAddress.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TokenAddresses and only return the `tokenAddress`
-     * const tokenAddressWithTokenAddressOnly = await prisma.tokenAddress.createManyAndReturn({
-     *   select: { tokenAddress: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TokenAddressCreateManyAndReturnArgs>(args?: SelectSubset<T, TokenAddressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TokenAddress.
-     * @param {TokenAddressDeleteArgs} args - Arguments to delete one TokenAddress.
-     * @example
-     * // Delete one TokenAddress
-     * const TokenAddress = await prisma.tokenAddress.delete({
-     *   where: {
-     *     // ... filter to delete one TokenAddress
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TokenAddressDeleteArgs>(args: SelectSubset<T, TokenAddressDeleteArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TokenAddress.
-     * @param {TokenAddressUpdateArgs} args - Arguments to update one TokenAddress.
-     * @example
-     * // Update one TokenAddress
-     * const tokenAddress = await prisma.tokenAddress.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TokenAddressUpdateArgs>(args: SelectSubset<T, TokenAddressUpdateArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TokenAddresses.
-     * @param {TokenAddressDeleteManyArgs} args - Arguments to filter TokenAddresses to delete.
-     * @example
-     * // Delete a few TokenAddresses
-     * const { count } = await prisma.tokenAddress.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TokenAddressDeleteManyArgs>(args?: SelectSubset<T, TokenAddressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TokenAddresses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TokenAddressUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TokenAddresses
-     * const tokenAddress = await prisma.tokenAddress.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TokenAddressUpdateManyArgs>(args: SelectSubset<T, TokenAddressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TokenAddresses and returns the data updated in the database.
-     * @param {TokenAddressUpdateManyAndReturnArgs} args - Arguments to update many TokenAddresses.
-     * @example
-     * // Update many TokenAddresses
-     * const tokenAddress = await prisma.tokenAddress.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TokenAddresses and only return the `tokenAddress`
-     * const tokenAddressWithTokenAddressOnly = await prisma.tokenAddress.updateManyAndReturn({
-     *   select: { tokenAddress: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TokenAddressUpdateManyAndReturnArgs>(args: SelectSubset<T, TokenAddressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TokenAddress.
-     * @param {TokenAddressUpsertArgs} args - Arguments to update or create a TokenAddress.
-     * @example
-     * // Update or create a TokenAddress
-     * const tokenAddress = await prisma.tokenAddress.upsert({
-     *   create: {
-     *     // ... data to create a TokenAddress
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TokenAddress we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TokenAddressUpsertArgs>(args: SelectSubset<T, TokenAddressUpsertArgs<ExtArgs>>): Prisma__TokenAddressClient<$Result.GetResult<Prisma.$TokenAddressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TokenAddresses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TokenAddressCountArgs} args - Arguments to filter TokenAddresses to count.
-     * @example
-     * // Count the number of TokenAddresses
-     * const count = await prisma.tokenAddress.count({
-     *   where: {
-     *     // ... the filter for the TokenAddresses we want to count
-     *   }
-     * })
-    **/
-    count<T extends TokenAddressCountArgs>(
-      args?: Subset<T, TokenAddressCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TokenAddressCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TokenAddress.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TokenAddressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TokenAddressAggregateArgs>(args: Subset<T, TokenAddressAggregateArgs>): Prisma.PrismaPromise<GetTokenAddressAggregateType<T>>
-
-    /**
-     * Group by TokenAddress.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TokenAddressGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TokenAddressGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TokenAddressGroupByArgs['orderBy'] }
-        : { orderBy?: TokenAddressGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TokenAddressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTokenAddressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TokenAddress model
-   */
-  readonly fields: TokenAddressFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TokenAddress.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TokenAddressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    token<T extends TokenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TokenDefaultArgs<ExtArgs>>): Prisma__TokenClient<$Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    chain<T extends ChainRefDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChainRefDefaultArgs<ExtArgs>>): Prisma__ChainRefClient<$Result.GetResult<Prisma.$ChainRefPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    poolsAsToken0<T extends TokenAddress$poolsAsToken0Args<ExtArgs> = {}>(args?: Subset<T, TokenAddress$poolsAsToken0Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    poolsAsToken1<T extends TokenAddress$poolsAsToken1Args<ExtArgs> = {}>(args?: Subset<T, TokenAddress$poolsAsToken1Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TokenAddress model
-   */
-  interface TokenAddressFieldRefs {
-    readonly tokenAddress: FieldRef<"TokenAddress", 'String'>
-    readonly chainId: FieldRef<"TokenAddress", 'String'>
-    readonly tokenId: FieldRef<"TokenAddress", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TokenAddress findUnique
-   */
-  export type TokenAddressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * Filter, which TokenAddress to fetch.
-     */
-    where: TokenAddressWhereUniqueInput
-  }
-
-  /**
-   * TokenAddress findUniqueOrThrow
-   */
-  export type TokenAddressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * Filter, which TokenAddress to fetch.
-     */
-    where: TokenAddressWhereUniqueInput
-  }
-
-  /**
-   * TokenAddress findFirst
-   */
-  export type TokenAddressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * Filter, which TokenAddress to fetch.
-     */
-    where?: TokenAddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TokenAddresses to fetch.
-     */
-    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TokenAddresses.
-     */
-    cursor?: TokenAddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TokenAddresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TokenAddresses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TokenAddresses.
-     */
-    distinct?: TokenAddressScalarFieldEnum | TokenAddressScalarFieldEnum[]
-  }
-
-  /**
-   * TokenAddress findFirstOrThrow
-   */
-  export type TokenAddressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * Filter, which TokenAddress to fetch.
-     */
-    where?: TokenAddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TokenAddresses to fetch.
-     */
-    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TokenAddresses.
-     */
-    cursor?: TokenAddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TokenAddresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TokenAddresses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TokenAddresses.
-     */
-    distinct?: TokenAddressScalarFieldEnum | TokenAddressScalarFieldEnum[]
-  }
-
-  /**
-   * TokenAddress findMany
-   */
-  export type TokenAddressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * Filter, which TokenAddresses to fetch.
-     */
-    where?: TokenAddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TokenAddresses to fetch.
-     */
-    orderBy?: TokenAddressOrderByWithRelationInput | TokenAddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TokenAddresses.
-     */
-    cursor?: TokenAddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TokenAddresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TokenAddresses.
-     */
-    skip?: number
-    distinct?: TokenAddressScalarFieldEnum | TokenAddressScalarFieldEnum[]
-  }
-
-  /**
-   * TokenAddress create
-   */
-  export type TokenAddressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TokenAddress.
-     */
-    data: XOR<TokenAddressCreateInput, TokenAddressUncheckedCreateInput>
-  }
-
-  /**
-   * TokenAddress createMany
-   */
-  export type TokenAddressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TokenAddresses.
-     */
-    data: TokenAddressCreateManyInput | TokenAddressCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TokenAddress createManyAndReturn
-   */
-  export type TokenAddressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * The data used to create many TokenAddresses.
-     */
-    data: TokenAddressCreateManyInput | TokenAddressCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TokenAddress update
-   */
-  export type TokenAddressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TokenAddress.
-     */
-    data: XOR<TokenAddressUpdateInput, TokenAddressUncheckedUpdateInput>
-    /**
-     * Choose, which TokenAddress to update.
-     */
-    where: TokenAddressWhereUniqueInput
-  }
-
-  /**
-   * TokenAddress updateMany
-   */
-  export type TokenAddressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TokenAddresses.
-     */
-    data: XOR<TokenAddressUpdateManyMutationInput, TokenAddressUncheckedUpdateManyInput>
-    /**
-     * Filter which TokenAddresses to update
-     */
-    where?: TokenAddressWhereInput
-    /**
-     * Limit how many TokenAddresses to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TokenAddress updateManyAndReturn
-   */
-  export type TokenAddressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * The data used to update TokenAddresses.
-     */
-    data: XOR<TokenAddressUpdateManyMutationInput, TokenAddressUncheckedUpdateManyInput>
-    /**
-     * Filter which TokenAddresses to update
-     */
-    where?: TokenAddressWhereInput
-    /**
-     * Limit how many TokenAddresses to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TokenAddress upsert
-   */
-  export type TokenAddressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TokenAddress to update in case it exists.
-     */
-    where: TokenAddressWhereUniqueInput
-    /**
-     * In case the TokenAddress found by the `where` argument doesn't exist, create a new TokenAddress with this data.
-     */
-    create: XOR<TokenAddressCreateInput, TokenAddressUncheckedCreateInput>
-    /**
-     * In case the TokenAddress was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TokenAddressUpdateInput, TokenAddressUncheckedUpdateInput>
-  }
-
-  /**
-   * TokenAddress delete
-   */
-  export type TokenAddressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-    /**
-     * Filter which TokenAddress to delete.
-     */
-    where: TokenAddressWhereUniqueInput
-  }
-
-  /**
-   * TokenAddress deleteMany
-   */
-  export type TokenAddressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TokenAddresses to delete
-     */
-    where?: TokenAddressWhereInput
-    /**
-     * Limit how many TokenAddresses to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TokenAddress.poolsAsToken0
-   */
-  export type TokenAddress$poolsAsToken0Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Pool
-     */
-    select?: PoolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Pool
-     */
-    omit?: PoolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PoolInclude<ExtArgs> | null
-    where?: PoolWhereInput
-    orderBy?: PoolOrderByWithRelationInput | PoolOrderByWithRelationInput[]
-    cursor?: PoolWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PoolScalarFieldEnum | PoolScalarFieldEnum[]
-  }
-
-  /**
-   * TokenAddress.poolsAsToken1
-   */
-  export type TokenAddress$poolsAsToken1Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Pool
-     */
-    select?: PoolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Pool
-     */
-    omit?: PoolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PoolInclude<ExtArgs> | null
-    where?: PoolWhereInput
-    orderBy?: PoolOrderByWithRelationInput | PoolOrderByWithRelationInput[]
-    cursor?: PoolWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PoolScalarFieldEnum | PoolScalarFieldEnum[]
-  }
-
-  /**
-   * TokenAddress without action
-   */
-  export type TokenAddressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TokenAddress
-     */
-    select?: TokenAddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TokenAddress
-     */
-    omit?: TokenAddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TokenAddressInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -5612,6 +5612,15 @@ export namespace Prisma {
   export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
 
 
+  export const TokenAddressScalarFieldEnum: {
+    tokenAddress: 'tokenAddress',
+    chainId: 'chainId',
+    tokenId: 'tokenId'
+  };
+
+  export type TokenAddressScalarFieldEnum = (typeof TokenAddressScalarFieldEnum)[keyof typeof TokenAddressScalarFieldEnum]
+
+
   export const ChainRefScalarFieldEnum: {
     id: 'id',
     networkName: 'networkName'
@@ -5629,15 +5638,6 @@ export namespace Prisma {
   };
 
   export type PoolScalarFieldEnum = (typeof PoolScalarFieldEnum)[keyof typeof PoolScalarFieldEnum]
-
-
-  export const TokenAddressScalarFieldEnum: {
-    tokenAddress: 'tokenAddress',
-    chainId: 'chainId',
-    tokenId: 'tokenId'
-  };
-
-  export type TokenAddressScalarFieldEnum = (typeof TokenAddressScalarFieldEnum)[keyof typeof TokenAddressScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5737,15 +5737,15 @@ export namespace Prisma {
 
   export type TokenWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    tokenName?: string
     AND?: TokenWhereInput | TokenWhereInput[]
     OR?: TokenWhereInput[]
     NOT?: TokenWhereInput | TokenWhereInput[]
-    tokenName?: StringFilter<"Token"> | string
     tokenDecimals?: IntFilter<"Token"> | number
     tokenSymbol?: StringFilter<"Token"> | string
     logoUrl?: StringNullableFilter<"Token"> | string | null
     addresses?: TokenAddressListRelationFilter
-  }, "id">
+  }, "id" | "tokenName">
 
   export type TokenOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5769,6 +5769,61 @@ export namespace Prisma {
     tokenDecimals?: IntWithAggregatesFilter<"Token"> | number
     tokenSymbol?: StringWithAggregatesFilter<"Token"> | string
     logoUrl?: StringNullableWithAggregatesFilter<"Token"> | string | null
+  }
+
+  export type TokenAddressWhereInput = {
+    AND?: TokenAddressWhereInput | TokenAddressWhereInput[]
+    OR?: TokenAddressWhereInput[]
+    NOT?: TokenAddressWhereInput | TokenAddressWhereInput[]
+    tokenAddress?: StringFilter<"TokenAddress"> | string
+    chainId?: StringFilter<"TokenAddress"> | string
+    tokenId?: StringFilter<"TokenAddress"> | string
+    token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
+    chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
+    poolsAsToken0?: PoolListRelationFilter
+    poolsAsToken1?: PoolListRelationFilter
+  }
+
+  export type TokenAddressOrderByWithRelationInput = {
+    tokenAddress?: SortOrder
+    chainId?: SortOrder
+    tokenId?: SortOrder
+    token?: TokenOrderByWithRelationInput
+    chain?: ChainRefOrderByWithRelationInput
+    poolsAsToken0?: PoolOrderByRelationAggregateInput
+    poolsAsToken1?: PoolOrderByRelationAggregateInput
+  }
+
+  export type TokenAddressWhereUniqueInput = Prisma.AtLeast<{
+    tokenAddress_chainId?: TokenAddressTokenAddressChainIdCompoundUniqueInput
+    AND?: TokenAddressWhereInput | TokenAddressWhereInput[]
+    OR?: TokenAddressWhereInput[]
+    NOT?: TokenAddressWhereInput | TokenAddressWhereInput[]
+    tokenAddress?: StringFilter<"TokenAddress"> | string
+    chainId?: StringFilter<"TokenAddress"> | string
+    tokenId?: StringFilter<"TokenAddress"> | string
+    token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
+    chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
+    poolsAsToken0?: PoolListRelationFilter
+    poolsAsToken1?: PoolListRelationFilter
+  }, "tokenAddress_chainId">
+
+  export type TokenAddressOrderByWithAggregationInput = {
+    tokenAddress?: SortOrder
+    chainId?: SortOrder
+    tokenId?: SortOrder
+    _count?: TokenAddressCountOrderByAggregateInput
+    _max?: TokenAddressMaxOrderByAggregateInput
+    _min?: TokenAddressMinOrderByAggregateInput
+  }
+
+  export type TokenAddressScalarWhereWithAggregatesInput = {
+    AND?: TokenAddressScalarWhereWithAggregatesInput | TokenAddressScalarWhereWithAggregatesInput[]
+    OR?: TokenAddressScalarWhereWithAggregatesInput[]
+    NOT?: TokenAddressScalarWhereWithAggregatesInput | TokenAddressScalarWhereWithAggregatesInput[]
+    tokenAddress?: StringWithAggregatesFilter<"TokenAddress"> | string
+    chainId?: StringWithAggregatesFilter<"TokenAddress"> | string
+    tokenId?: StringWithAggregatesFilter<"TokenAddress"> | string
   }
 
   export type ChainRefWhereInput = {
@@ -5840,11 +5895,11 @@ export namespace Prisma {
   }
 
   export type PoolWhereUniqueInput = Prisma.AtLeast<{
+    poolAddress?: string
     poolAddress_chainId?: PoolPoolAddressChainIdCompoundUniqueInput
     AND?: PoolWhereInput | PoolWhereInput[]
     OR?: PoolWhereInput[]
     NOT?: PoolWhereInput | PoolWhereInput[]
-    poolAddress?: StringFilter<"Pool"> | string
     token0Address?: StringFilter<"Pool"> | string
     token1Address?: StringFilter<"Pool"> | string
     dexName?: StringFilter<"Pool"> | string
@@ -5852,7 +5907,7 @@ export namespace Prisma {
     chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
     token0?: XOR<TokenAddressScalarRelationFilter, TokenAddressWhereInput>
     token1?: XOR<TokenAddressScalarRelationFilter, TokenAddressWhereInput>
-  }, "poolAddress_chainId">
+  }, "poolAddress_chainId" | "poolAddress">
 
   export type PoolOrderByWithAggregationInput = {
     poolAddress?: SortOrder
@@ -5874,61 +5929,6 @@ export namespace Prisma {
     token1Address?: StringWithAggregatesFilter<"Pool"> | string
     dexName?: StringWithAggregatesFilter<"Pool"> | string
     chainId?: StringWithAggregatesFilter<"Pool"> | string
-  }
-
-  export type TokenAddressWhereInput = {
-    AND?: TokenAddressWhereInput | TokenAddressWhereInput[]
-    OR?: TokenAddressWhereInput[]
-    NOT?: TokenAddressWhereInput | TokenAddressWhereInput[]
-    tokenAddress?: StringFilter<"TokenAddress"> | string
-    chainId?: StringFilter<"TokenAddress"> | string
-    tokenId?: StringFilter<"TokenAddress"> | string
-    token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
-    chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
-    poolsAsToken0?: PoolListRelationFilter
-    poolsAsToken1?: PoolListRelationFilter
-  }
-
-  export type TokenAddressOrderByWithRelationInput = {
-    tokenAddress?: SortOrder
-    chainId?: SortOrder
-    tokenId?: SortOrder
-    token?: TokenOrderByWithRelationInput
-    chain?: ChainRefOrderByWithRelationInput
-    poolsAsToken0?: PoolOrderByRelationAggregateInput
-    poolsAsToken1?: PoolOrderByRelationAggregateInput
-  }
-
-  export type TokenAddressWhereUniqueInput = Prisma.AtLeast<{
-    tokenAddress_chainId?: TokenAddressTokenAddressChainIdCompoundUniqueInput
-    AND?: TokenAddressWhereInput | TokenAddressWhereInput[]
-    OR?: TokenAddressWhereInput[]
-    NOT?: TokenAddressWhereInput | TokenAddressWhereInput[]
-    tokenAddress?: StringFilter<"TokenAddress"> | string
-    chainId?: StringFilter<"TokenAddress"> | string
-    tokenId?: StringFilter<"TokenAddress"> | string
-    token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
-    chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
-    poolsAsToken0?: PoolListRelationFilter
-    poolsAsToken1?: PoolListRelationFilter
-  }, "tokenAddress_chainId">
-
-  export type TokenAddressOrderByWithAggregationInput = {
-    tokenAddress?: SortOrder
-    chainId?: SortOrder
-    tokenId?: SortOrder
-    _count?: TokenAddressCountOrderByAggregateInput
-    _max?: TokenAddressMaxOrderByAggregateInput
-    _min?: TokenAddressMinOrderByAggregateInput
-  }
-
-  export type TokenAddressScalarWhereWithAggregatesInput = {
-    AND?: TokenAddressScalarWhereWithAggregatesInput | TokenAddressScalarWhereWithAggregatesInput[]
-    OR?: TokenAddressScalarWhereWithAggregatesInput[]
-    NOT?: TokenAddressScalarWhereWithAggregatesInput | TokenAddressScalarWhereWithAggregatesInput[]
-    tokenAddress?: StringWithAggregatesFilter<"TokenAddress"> | string
-    chainId?: StringWithAggregatesFilter<"TokenAddress"> | string
-    tokenId?: StringWithAggregatesFilter<"TokenAddress"> | string
   }
 
   export type TokenCreateInput = {
@@ -5989,6 +5989,54 @@ export namespace Prisma {
     tokenDecimals?: IntFieldUpdateOperationsInput | number
     tokenSymbol?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TokenAddressCreateInput = {
+    tokenAddress: string
+    token: TokenCreateNestedOneWithoutAddressesInput
+    chain: ChainRefCreateNestedOneWithoutTokenAddressesInput
+    poolsAsToken0?: PoolCreateNestedManyWithoutToken0Input
+    poolsAsToken1?: PoolCreateNestedManyWithoutToken1Input
+  }
+
+  export type TokenAddressUncheckedCreateInput = {
+    tokenAddress: string
+    chainId: string
+    tokenId: string
+    poolsAsToken0?: PoolUncheckedCreateNestedManyWithoutToken0Input
+    poolsAsToken1?: PoolUncheckedCreateNestedManyWithoutToken1Input
+  }
+
+  export type TokenAddressUpdateInput = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+    token?: TokenUpdateOneRequiredWithoutAddressesNestedInput
+    chain?: ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput
+    poolsAsToken0?: PoolUpdateManyWithoutToken0NestedInput
+    poolsAsToken1?: PoolUpdateManyWithoutToken1NestedInput
+  }
+
+  export type TokenAddressUncheckedUpdateInput = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+    chainId?: StringFieldUpdateOperationsInput | string
+    tokenId?: StringFieldUpdateOperationsInput | string
+    poolsAsToken0?: PoolUncheckedUpdateManyWithoutToken0NestedInput
+    poolsAsToken1?: PoolUncheckedUpdateManyWithoutToken1NestedInput
+  }
+
+  export type TokenAddressCreateManyInput = {
+    tokenAddress: string
+    chainId: string
+    tokenId: string
+  }
+
+  export type TokenAddressUpdateManyMutationInput = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TokenAddressUncheckedUpdateManyInput = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+    chainId?: StringFieldUpdateOperationsInput | string
+    tokenId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ChainRefCreateInput = {
@@ -6085,54 +6133,6 @@ export namespace Prisma {
     token1Address?: StringFieldUpdateOperationsInput | string
     dexName?: StringFieldUpdateOperationsInput | string
     chainId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TokenAddressCreateInput = {
-    tokenAddress: string
-    token: TokenCreateNestedOneWithoutAddressesInput
-    chain: ChainRefCreateNestedOneWithoutTokenAddressesInput
-    poolsAsToken0?: PoolCreateNestedManyWithoutToken0Input
-    poolsAsToken1?: PoolCreateNestedManyWithoutToken1Input
-  }
-
-  export type TokenAddressUncheckedCreateInput = {
-    tokenAddress: string
-    chainId: string
-    tokenId: string
-    poolsAsToken0?: PoolUncheckedCreateNestedManyWithoutToken0Input
-    poolsAsToken1?: PoolUncheckedCreateNestedManyWithoutToken1Input
-  }
-
-  export type TokenAddressUpdateInput = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-    token?: TokenUpdateOneRequiredWithoutAddressesNestedInput
-    chain?: ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput
-    poolsAsToken0?: PoolUpdateManyWithoutToken0NestedInput
-    poolsAsToken1?: PoolUpdateManyWithoutToken1NestedInput
-  }
-
-  export type TokenAddressUncheckedUpdateInput = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-    chainId?: StringFieldUpdateOperationsInput | string
-    tokenId?: StringFieldUpdateOperationsInput | string
-    poolsAsToken0?: PoolUncheckedUpdateManyWithoutToken0NestedInput
-    poolsAsToken1?: PoolUncheckedUpdateManyWithoutToken1NestedInput
-  }
-
-  export type TokenAddressCreateManyInput = {
-    tokenAddress: string
-    chainId: string
-    tokenId: string
-  }
-
-  export type TokenAddressUpdateManyMutationInput = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TokenAddressUncheckedUpdateManyInput = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-    chainId?: StringFieldUpdateOperationsInput | string
-    tokenId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6275,6 +6275,16 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type TokenScalarRelationFilter = {
+    is?: TokenWhereInput
+    isNot?: TokenWhereInput
+  }
+
+  export type ChainRefScalarRelationFilter = {
+    is?: ChainRefWhereInput
+    isNot?: ChainRefWhereInput
+  }
+
   export type PoolListRelationFilter = {
     every?: PoolWhereInput
     some?: PoolWhereInput
@@ -6283,6 +6293,29 @@ export namespace Prisma {
 
   export type PoolOrderByRelationAggregateInput = {
     _count?: SortOrder
+  }
+
+  export type TokenAddressTokenAddressChainIdCompoundUniqueInput = {
+    tokenAddress: string
+    chainId: string
+  }
+
+  export type TokenAddressCountOrderByAggregateInput = {
+    tokenAddress?: SortOrder
+    chainId?: SortOrder
+    tokenId?: SortOrder
+  }
+
+  export type TokenAddressMaxOrderByAggregateInput = {
+    tokenAddress?: SortOrder
+    chainId?: SortOrder
+    tokenId?: SortOrder
+  }
+
+  export type TokenAddressMinOrderByAggregateInput = {
+    tokenAddress?: SortOrder
+    chainId?: SortOrder
+    tokenId?: SortOrder
   }
 
   export type ChainRefCountOrderByAggregateInput = {
@@ -6298,11 +6331,6 @@ export namespace Prisma {
   export type ChainRefMinOrderByAggregateInput = {
     id?: SortOrder
     networkName?: SortOrder
-  }
-
-  export type ChainRefScalarRelationFilter = {
-    is?: ChainRefWhereInput
-    isNot?: ChainRefWhereInput
   }
 
   export type TokenAddressScalarRelationFilter = {
@@ -6337,34 +6365,6 @@ export namespace Prisma {
     token1Address?: SortOrder
     dexName?: SortOrder
     chainId?: SortOrder
-  }
-
-  export type TokenScalarRelationFilter = {
-    is?: TokenWhereInput
-    isNot?: TokenWhereInput
-  }
-
-  export type TokenAddressTokenAddressChainIdCompoundUniqueInput = {
-    tokenAddress: string
-    chainId: string
-  }
-
-  export type TokenAddressCountOrderByAggregateInput = {
-    tokenAddress?: SortOrder
-    chainId?: SortOrder
-    tokenId?: SortOrder
-  }
-
-  export type TokenAddressMaxOrderByAggregateInput = {
-    tokenAddress?: SortOrder
-    chainId?: SortOrder
-    tokenId?: SortOrder
-  }
-
-  export type TokenAddressMinOrderByAggregateInput = {
-    tokenAddress?: SortOrder
-    chainId?: SortOrder
-    tokenId?: SortOrder
   }
 
   export type TokenAddressCreateNestedManyWithoutTokenInput = {
@@ -6423,6 +6423,118 @@ export namespace Prisma {
     update?: TokenAddressUpdateWithWhereUniqueWithoutTokenInput | TokenAddressUpdateWithWhereUniqueWithoutTokenInput[]
     updateMany?: TokenAddressUpdateManyWithWhereWithoutTokenInput | TokenAddressUpdateManyWithWhereWithoutTokenInput[]
     deleteMany?: TokenAddressScalarWhereInput | TokenAddressScalarWhereInput[]
+  }
+
+  export type TokenCreateNestedOneWithoutAddressesInput = {
+    create?: XOR<TokenCreateWithoutAddressesInput, TokenUncheckedCreateWithoutAddressesInput>
+    connectOrCreate?: TokenCreateOrConnectWithoutAddressesInput
+    connect?: TokenWhereUniqueInput
+  }
+
+  export type ChainRefCreateNestedOneWithoutTokenAddressesInput = {
+    create?: XOR<ChainRefCreateWithoutTokenAddressesInput, ChainRefUncheckedCreateWithoutTokenAddressesInput>
+    connectOrCreate?: ChainRefCreateOrConnectWithoutTokenAddressesInput
+    connect?: ChainRefWhereUniqueInput
+  }
+
+  export type PoolCreateNestedManyWithoutToken0Input = {
+    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
+    createMany?: PoolCreateManyToken0InputEnvelope
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+  }
+
+  export type PoolCreateNestedManyWithoutToken1Input = {
+    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
+    createMany?: PoolCreateManyToken1InputEnvelope
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+  }
+
+  export type PoolUncheckedCreateNestedManyWithoutToken0Input = {
+    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
+    createMany?: PoolCreateManyToken0InputEnvelope
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+  }
+
+  export type PoolUncheckedCreateNestedManyWithoutToken1Input = {
+    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
+    createMany?: PoolCreateManyToken1InputEnvelope
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+  }
+
+  export type TokenUpdateOneRequiredWithoutAddressesNestedInput = {
+    create?: XOR<TokenCreateWithoutAddressesInput, TokenUncheckedCreateWithoutAddressesInput>
+    connectOrCreate?: TokenCreateOrConnectWithoutAddressesInput
+    upsert?: TokenUpsertWithoutAddressesInput
+    connect?: TokenWhereUniqueInput
+    update?: XOR<XOR<TokenUpdateToOneWithWhereWithoutAddressesInput, TokenUpdateWithoutAddressesInput>, TokenUncheckedUpdateWithoutAddressesInput>
+  }
+
+  export type ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput = {
+    create?: XOR<ChainRefCreateWithoutTokenAddressesInput, ChainRefUncheckedCreateWithoutTokenAddressesInput>
+    connectOrCreate?: ChainRefCreateOrConnectWithoutTokenAddressesInput
+    upsert?: ChainRefUpsertWithoutTokenAddressesInput
+    connect?: ChainRefWhereUniqueInput
+    update?: XOR<XOR<ChainRefUpdateToOneWithWhereWithoutTokenAddressesInput, ChainRefUpdateWithoutTokenAddressesInput>, ChainRefUncheckedUpdateWithoutTokenAddressesInput>
+  }
+
+  export type PoolUpdateManyWithoutToken0NestedInput = {
+    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
+    upsert?: PoolUpsertWithWhereUniqueWithoutToken0Input | PoolUpsertWithWhereUniqueWithoutToken0Input[]
+    createMany?: PoolCreateManyToken0InputEnvelope
+    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    update?: PoolUpdateWithWhereUniqueWithoutToken0Input | PoolUpdateWithWhereUniqueWithoutToken0Input[]
+    updateMany?: PoolUpdateManyWithWhereWithoutToken0Input | PoolUpdateManyWithWhereWithoutToken0Input[]
+    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
+  }
+
+  export type PoolUpdateManyWithoutToken1NestedInput = {
+    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
+    upsert?: PoolUpsertWithWhereUniqueWithoutToken1Input | PoolUpsertWithWhereUniqueWithoutToken1Input[]
+    createMany?: PoolCreateManyToken1InputEnvelope
+    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    update?: PoolUpdateWithWhereUniqueWithoutToken1Input | PoolUpdateWithWhereUniqueWithoutToken1Input[]
+    updateMany?: PoolUpdateManyWithWhereWithoutToken1Input | PoolUpdateManyWithWhereWithoutToken1Input[]
+    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
+  }
+
+  export type PoolUncheckedUpdateManyWithoutToken0NestedInput = {
+    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
+    upsert?: PoolUpsertWithWhereUniqueWithoutToken0Input | PoolUpsertWithWhereUniqueWithoutToken0Input[]
+    createMany?: PoolCreateManyToken0InputEnvelope
+    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    update?: PoolUpdateWithWhereUniqueWithoutToken0Input | PoolUpdateWithWhereUniqueWithoutToken0Input[]
+    updateMany?: PoolUpdateManyWithWhereWithoutToken0Input | PoolUpdateManyWithWhereWithoutToken0Input[]
+    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
+  }
+
+  export type PoolUncheckedUpdateManyWithoutToken1NestedInput = {
+    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
+    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
+    upsert?: PoolUpsertWithWhereUniqueWithoutToken1Input | PoolUpsertWithWhereUniqueWithoutToken1Input[]
+    createMany?: PoolCreateManyToken1InputEnvelope
+    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
+    update?: PoolUpdateWithWhereUniqueWithoutToken1Input | PoolUpdateWithWhereUniqueWithoutToken1Input[]
+    updateMany?: PoolUpdateManyWithWhereWithoutToken1Input | PoolUpdateManyWithWhereWithoutToken1Input[]
+    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
   }
 
   export type TokenAddressCreateNestedManyWithoutChainInput = {
@@ -6549,118 +6661,6 @@ export namespace Prisma {
     upsert?: TokenAddressUpsertWithoutPoolsAsToken1Input
     connect?: TokenAddressWhereUniqueInput
     update?: XOR<XOR<TokenAddressUpdateToOneWithWhereWithoutPoolsAsToken1Input, TokenAddressUpdateWithoutPoolsAsToken1Input>, TokenAddressUncheckedUpdateWithoutPoolsAsToken1Input>
-  }
-
-  export type TokenCreateNestedOneWithoutAddressesInput = {
-    create?: XOR<TokenCreateWithoutAddressesInput, TokenUncheckedCreateWithoutAddressesInput>
-    connectOrCreate?: TokenCreateOrConnectWithoutAddressesInput
-    connect?: TokenWhereUniqueInput
-  }
-
-  export type ChainRefCreateNestedOneWithoutTokenAddressesInput = {
-    create?: XOR<ChainRefCreateWithoutTokenAddressesInput, ChainRefUncheckedCreateWithoutTokenAddressesInput>
-    connectOrCreate?: ChainRefCreateOrConnectWithoutTokenAddressesInput
-    connect?: ChainRefWhereUniqueInput
-  }
-
-  export type PoolCreateNestedManyWithoutToken0Input = {
-    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
-    createMany?: PoolCreateManyToken0InputEnvelope
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-  }
-
-  export type PoolCreateNestedManyWithoutToken1Input = {
-    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
-    createMany?: PoolCreateManyToken1InputEnvelope
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-  }
-
-  export type PoolUncheckedCreateNestedManyWithoutToken0Input = {
-    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
-    createMany?: PoolCreateManyToken0InputEnvelope
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-  }
-
-  export type PoolUncheckedCreateNestedManyWithoutToken1Input = {
-    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
-    createMany?: PoolCreateManyToken1InputEnvelope
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-  }
-
-  export type TokenUpdateOneRequiredWithoutAddressesNestedInput = {
-    create?: XOR<TokenCreateWithoutAddressesInput, TokenUncheckedCreateWithoutAddressesInput>
-    connectOrCreate?: TokenCreateOrConnectWithoutAddressesInput
-    upsert?: TokenUpsertWithoutAddressesInput
-    connect?: TokenWhereUniqueInput
-    update?: XOR<XOR<TokenUpdateToOneWithWhereWithoutAddressesInput, TokenUpdateWithoutAddressesInput>, TokenUncheckedUpdateWithoutAddressesInput>
-  }
-
-  export type ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput = {
-    create?: XOR<ChainRefCreateWithoutTokenAddressesInput, ChainRefUncheckedCreateWithoutTokenAddressesInput>
-    connectOrCreate?: ChainRefCreateOrConnectWithoutTokenAddressesInput
-    upsert?: ChainRefUpsertWithoutTokenAddressesInput
-    connect?: ChainRefWhereUniqueInput
-    update?: XOR<XOR<ChainRefUpdateToOneWithWhereWithoutTokenAddressesInput, ChainRefUpdateWithoutTokenAddressesInput>, ChainRefUncheckedUpdateWithoutTokenAddressesInput>
-  }
-
-  export type PoolUpdateManyWithoutToken0NestedInput = {
-    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
-    upsert?: PoolUpsertWithWhereUniqueWithoutToken0Input | PoolUpsertWithWhereUniqueWithoutToken0Input[]
-    createMany?: PoolCreateManyToken0InputEnvelope
-    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    update?: PoolUpdateWithWhereUniqueWithoutToken0Input | PoolUpdateWithWhereUniqueWithoutToken0Input[]
-    updateMany?: PoolUpdateManyWithWhereWithoutToken0Input | PoolUpdateManyWithWhereWithoutToken0Input[]
-    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
-  }
-
-  export type PoolUpdateManyWithoutToken1NestedInput = {
-    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
-    upsert?: PoolUpsertWithWhereUniqueWithoutToken1Input | PoolUpsertWithWhereUniqueWithoutToken1Input[]
-    createMany?: PoolCreateManyToken1InputEnvelope
-    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    update?: PoolUpdateWithWhereUniqueWithoutToken1Input | PoolUpdateWithWhereUniqueWithoutToken1Input[]
-    updateMany?: PoolUpdateManyWithWhereWithoutToken1Input | PoolUpdateManyWithWhereWithoutToken1Input[]
-    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
-  }
-
-  export type PoolUncheckedUpdateManyWithoutToken0NestedInput = {
-    create?: XOR<PoolCreateWithoutToken0Input, PoolUncheckedCreateWithoutToken0Input> | PoolCreateWithoutToken0Input[] | PoolUncheckedCreateWithoutToken0Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken0Input | PoolCreateOrConnectWithoutToken0Input[]
-    upsert?: PoolUpsertWithWhereUniqueWithoutToken0Input | PoolUpsertWithWhereUniqueWithoutToken0Input[]
-    createMany?: PoolCreateManyToken0InputEnvelope
-    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    update?: PoolUpdateWithWhereUniqueWithoutToken0Input | PoolUpdateWithWhereUniqueWithoutToken0Input[]
-    updateMany?: PoolUpdateManyWithWhereWithoutToken0Input | PoolUpdateManyWithWhereWithoutToken0Input[]
-    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
-  }
-
-  export type PoolUncheckedUpdateManyWithoutToken1NestedInput = {
-    create?: XOR<PoolCreateWithoutToken1Input, PoolUncheckedCreateWithoutToken1Input> | PoolCreateWithoutToken1Input[] | PoolUncheckedCreateWithoutToken1Input[]
-    connectOrCreate?: PoolCreateOrConnectWithoutToken1Input | PoolCreateOrConnectWithoutToken1Input[]
-    upsert?: PoolUpsertWithWhereUniqueWithoutToken1Input | PoolUpsertWithWhereUniqueWithoutToken1Input[]
-    createMany?: PoolCreateManyToken1InputEnvelope
-    set?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    disconnect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    delete?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    connect?: PoolWhereUniqueInput | PoolWhereUniqueInput[]
-    update?: PoolUpdateWithWhereUniqueWithoutToken1Input | PoolUpdateWithWhereUniqueWithoutToken1Input[]
-    updateMany?: PoolUpdateManyWithWhereWithoutToken1Input | PoolUpdateManyWithWhereWithoutToken1Input[]
-    deleteMany?: PoolScalarWhereInput | PoolScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6823,225 +6823,6 @@ export namespace Prisma {
     tokenId?: StringFilter<"TokenAddress"> | string
   }
 
-  export type TokenAddressCreateWithoutChainInput = {
-    tokenAddress: string
-    token: TokenCreateNestedOneWithoutAddressesInput
-    poolsAsToken0?: PoolCreateNestedManyWithoutToken0Input
-    poolsAsToken1?: PoolCreateNestedManyWithoutToken1Input
-  }
-
-  export type TokenAddressUncheckedCreateWithoutChainInput = {
-    tokenAddress: string
-    tokenId: string
-    poolsAsToken0?: PoolUncheckedCreateNestedManyWithoutToken0Input
-    poolsAsToken1?: PoolUncheckedCreateNestedManyWithoutToken1Input
-  }
-
-  export type TokenAddressCreateOrConnectWithoutChainInput = {
-    where: TokenAddressWhereUniqueInput
-    create: XOR<TokenAddressCreateWithoutChainInput, TokenAddressUncheckedCreateWithoutChainInput>
-  }
-
-  export type TokenAddressCreateManyChainInputEnvelope = {
-    data: TokenAddressCreateManyChainInput | TokenAddressCreateManyChainInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PoolCreateWithoutChainInput = {
-    poolAddress: string
-    dexName: string
-    token0: TokenAddressCreateNestedOneWithoutPoolsAsToken0Input
-    token1: TokenAddressCreateNestedOneWithoutPoolsAsToken1Input
-  }
-
-  export type PoolUncheckedCreateWithoutChainInput = {
-    poolAddress: string
-    token0Address: string
-    token1Address: string
-    dexName: string
-  }
-
-  export type PoolCreateOrConnectWithoutChainInput = {
-    where: PoolWhereUniqueInput
-    create: XOR<PoolCreateWithoutChainInput, PoolUncheckedCreateWithoutChainInput>
-  }
-
-  export type PoolCreateManyChainInputEnvelope = {
-    data: PoolCreateManyChainInput | PoolCreateManyChainInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TokenAddressUpsertWithWhereUniqueWithoutChainInput = {
-    where: TokenAddressWhereUniqueInput
-    update: XOR<TokenAddressUpdateWithoutChainInput, TokenAddressUncheckedUpdateWithoutChainInput>
-    create: XOR<TokenAddressCreateWithoutChainInput, TokenAddressUncheckedCreateWithoutChainInput>
-  }
-
-  export type TokenAddressUpdateWithWhereUniqueWithoutChainInput = {
-    where: TokenAddressWhereUniqueInput
-    data: XOR<TokenAddressUpdateWithoutChainInput, TokenAddressUncheckedUpdateWithoutChainInput>
-  }
-
-  export type TokenAddressUpdateManyWithWhereWithoutChainInput = {
-    where: TokenAddressScalarWhereInput
-    data: XOR<TokenAddressUpdateManyMutationInput, TokenAddressUncheckedUpdateManyWithoutChainInput>
-  }
-
-  export type PoolUpsertWithWhereUniqueWithoutChainInput = {
-    where: PoolWhereUniqueInput
-    update: XOR<PoolUpdateWithoutChainInput, PoolUncheckedUpdateWithoutChainInput>
-    create: XOR<PoolCreateWithoutChainInput, PoolUncheckedCreateWithoutChainInput>
-  }
-
-  export type PoolUpdateWithWhereUniqueWithoutChainInput = {
-    where: PoolWhereUniqueInput
-    data: XOR<PoolUpdateWithoutChainInput, PoolUncheckedUpdateWithoutChainInput>
-  }
-
-  export type PoolUpdateManyWithWhereWithoutChainInput = {
-    where: PoolScalarWhereInput
-    data: XOR<PoolUpdateManyMutationInput, PoolUncheckedUpdateManyWithoutChainInput>
-  }
-
-  export type PoolScalarWhereInput = {
-    AND?: PoolScalarWhereInput | PoolScalarWhereInput[]
-    OR?: PoolScalarWhereInput[]
-    NOT?: PoolScalarWhereInput | PoolScalarWhereInput[]
-    poolAddress?: StringFilter<"Pool"> | string
-    token0Address?: StringFilter<"Pool"> | string
-    token1Address?: StringFilter<"Pool"> | string
-    dexName?: StringFilter<"Pool"> | string
-    chainId?: StringFilter<"Pool"> | string
-  }
-
-  export type ChainRefCreateWithoutPoolsInput = {
-    id: string
-    networkName?: string | null
-    tokenAddresses?: TokenAddressCreateNestedManyWithoutChainInput
-  }
-
-  export type ChainRefUncheckedCreateWithoutPoolsInput = {
-    id: string
-    networkName?: string | null
-    tokenAddresses?: TokenAddressUncheckedCreateNestedManyWithoutChainInput
-  }
-
-  export type ChainRefCreateOrConnectWithoutPoolsInput = {
-    where: ChainRefWhereUniqueInput
-    create: XOR<ChainRefCreateWithoutPoolsInput, ChainRefUncheckedCreateWithoutPoolsInput>
-  }
-
-  export type TokenAddressCreateWithoutPoolsAsToken0Input = {
-    tokenAddress: string
-    token: TokenCreateNestedOneWithoutAddressesInput
-    chain: ChainRefCreateNestedOneWithoutTokenAddressesInput
-    poolsAsToken1?: PoolCreateNestedManyWithoutToken1Input
-  }
-
-  export type TokenAddressUncheckedCreateWithoutPoolsAsToken0Input = {
-    tokenAddress: string
-    chainId: string
-    tokenId: string
-    poolsAsToken1?: PoolUncheckedCreateNestedManyWithoutToken1Input
-  }
-
-  export type TokenAddressCreateOrConnectWithoutPoolsAsToken0Input = {
-    where: TokenAddressWhereUniqueInput
-    create: XOR<TokenAddressCreateWithoutPoolsAsToken0Input, TokenAddressUncheckedCreateWithoutPoolsAsToken0Input>
-  }
-
-  export type TokenAddressCreateWithoutPoolsAsToken1Input = {
-    tokenAddress: string
-    token: TokenCreateNestedOneWithoutAddressesInput
-    chain: ChainRefCreateNestedOneWithoutTokenAddressesInput
-    poolsAsToken0?: PoolCreateNestedManyWithoutToken0Input
-  }
-
-  export type TokenAddressUncheckedCreateWithoutPoolsAsToken1Input = {
-    tokenAddress: string
-    chainId: string
-    tokenId: string
-    poolsAsToken0?: PoolUncheckedCreateNestedManyWithoutToken0Input
-  }
-
-  export type TokenAddressCreateOrConnectWithoutPoolsAsToken1Input = {
-    where: TokenAddressWhereUniqueInput
-    create: XOR<TokenAddressCreateWithoutPoolsAsToken1Input, TokenAddressUncheckedCreateWithoutPoolsAsToken1Input>
-  }
-
-  export type ChainRefUpsertWithoutPoolsInput = {
-    update: XOR<ChainRefUpdateWithoutPoolsInput, ChainRefUncheckedUpdateWithoutPoolsInput>
-    create: XOR<ChainRefCreateWithoutPoolsInput, ChainRefUncheckedCreateWithoutPoolsInput>
-    where?: ChainRefWhereInput
-  }
-
-  export type ChainRefUpdateToOneWithWhereWithoutPoolsInput = {
-    where?: ChainRefWhereInput
-    data: XOR<ChainRefUpdateWithoutPoolsInput, ChainRefUncheckedUpdateWithoutPoolsInput>
-  }
-
-  export type ChainRefUpdateWithoutPoolsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    networkName?: NullableStringFieldUpdateOperationsInput | string | null
-    tokenAddresses?: TokenAddressUpdateManyWithoutChainNestedInput
-  }
-
-  export type ChainRefUncheckedUpdateWithoutPoolsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    networkName?: NullableStringFieldUpdateOperationsInput | string | null
-    tokenAddresses?: TokenAddressUncheckedUpdateManyWithoutChainNestedInput
-  }
-
-  export type TokenAddressUpsertWithoutPoolsAsToken0Input = {
-    update: XOR<TokenAddressUpdateWithoutPoolsAsToken0Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken0Input>
-    create: XOR<TokenAddressCreateWithoutPoolsAsToken0Input, TokenAddressUncheckedCreateWithoutPoolsAsToken0Input>
-    where?: TokenAddressWhereInput
-  }
-
-  export type TokenAddressUpdateToOneWithWhereWithoutPoolsAsToken0Input = {
-    where?: TokenAddressWhereInput
-    data: XOR<TokenAddressUpdateWithoutPoolsAsToken0Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken0Input>
-  }
-
-  export type TokenAddressUpdateWithoutPoolsAsToken0Input = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-    token?: TokenUpdateOneRequiredWithoutAddressesNestedInput
-    chain?: ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput
-    poolsAsToken1?: PoolUpdateManyWithoutToken1NestedInput
-  }
-
-  export type TokenAddressUncheckedUpdateWithoutPoolsAsToken0Input = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-    chainId?: StringFieldUpdateOperationsInput | string
-    tokenId?: StringFieldUpdateOperationsInput | string
-    poolsAsToken1?: PoolUncheckedUpdateManyWithoutToken1NestedInput
-  }
-
-  export type TokenAddressUpsertWithoutPoolsAsToken1Input = {
-    update: XOR<TokenAddressUpdateWithoutPoolsAsToken1Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken1Input>
-    create: XOR<TokenAddressCreateWithoutPoolsAsToken1Input, TokenAddressUncheckedCreateWithoutPoolsAsToken1Input>
-    where?: TokenAddressWhereInput
-  }
-
-  export type TokenAddressUpdateToOneWithWhereWithoutPoolsAsToken1Input = {
-    where?: TokenAddressWhereInput
-    data: XOR<TokenAddressUpdateWithoutPoolsAsToken1Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken1Input>
-  }
-
-  export type TokenAddressUpdateWithoutPoolsAsToken1Input = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-    token?: TokenUpdateOneRequiredWithoutAddressesNestedInput
-    chain?: ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput
-    poolsAsToken0?: PoolUpdateManyWithoutToken0NestedInput
-  }
-
-  export type TokenAddressUncheckedUpdateWithoutPoolsAsToken1Input = {
-    tokenAddress?: StringFieldUpdateOperationsInput | string
-    chainId?: StringFieldUpdateOperationsInput | string
-    tokenId?: StringFieldUpdateOperationsInput | string
-    poolsAsToken0?: PoolUncheckedUpdateManyWithoutToken0NestedInput
-  }
-
   export type TokenCreateWithoutAddressesInput = {
     id?: string
     tokenName: string
@@ -7192,6 +6973,17 @@ export namespace Prisma {
     data: XOR<PoolUpdateManyMutationInput, PoolUncheckedUpdateManyWithoutToken0Input>
   }
 
+  export type PoolScalarWhereInput = {
+    AND?: PoolScalarWhereInput | PoolScalarWhereInput[]
+    OR?: PoolScalarWhereInput[]
+    NOT?: PoolScalarWhereInput | PoolScalarWhereInput[]
+    poolAddress?: StringFilter<"Pool"> | string
+    token0Address?: StringFilter<"Pool"> | string
+    token1Address?: StringFilter<"Pool"> | string
+    dexName?: StringFilter<"Pool"> | string
+    chainId?: StringFilter<"Pool"> | string
+  }
+
   export type PoolUpsertWithWhereUniqueWithoutToken1Input = {
     where: PoolWhereUniqueInput
     update: XOR<PoolUpdateWithoutToken1Input, PoolUncheckedUpdateWithoutToken1Input>
@@ -7206,6 +6998,214 @@ export namespace Prisma {
   export type PoolUpdateManyWithWhereWithoutToken1Input = {
     where: PoolScalarWhereInput
     data: XOR<PoolUpdateManyMutationInput, PoolUncheckedUpdateManyWithoutToken1Input>
+  }
+
+  export type TokenAddressCreateWithoutChainInput = {
+    tokenAddress: string
+    token: TokenCreateNestedOneWithoutAddressesInput
+    poolsAsToken0?: PoolCreateNestedManyWithoutToken0Input
+    poolsAsToken1?: PoolCreateNestedManyWithoutToken1Input
+  }
+
+  export type TokenAddressUncheckedCreateWithoutChainInput = {
+    tokenAddress: string
+    tokenId: string
+    poolsAsToken0?: PoolUncheckedCreateNestedManyWithoutToken0Input
+    poolsAsToken1?: PoolUncheckedCreateNestedManyWithoutToken1Input
+  }
+
+  export type TokenAddressCreateOrConnectWithoutChainInput = {
+    where: TokenAddressWhereUniqueInput
+    create: XOR<TokenAddressCreateWithoutChainInput, TokenAddressUncheckedCreateWithoutChainInput>
+  }
+
+  export type TokenAddressCreateManyChainInputEnvelope = {
+    data: TokenAddressCreateManyChainInput | TokenAddressCreateManyChainInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PoolCreateWithoutChainInput = {
+    poolAddress: string
+    dexName: string
+    token0: TokenAddressCreateNestedOneWithoutPoolsAsToken0Input
+    token1: TokenAddressCreateNestedOneWithoutPoolsAsToken1Input
+  }
+
+  export type PoolUncheckedCreateWithoutChainInput = {
+    poolAddress: string
+    token0Address: string
+    token1Address: string
+    dexName: string
+  }
+
+  export type PoolCreateOrConnectWithoutChainInput = {
+    where: PoolWhereUniqueInput
+    create: XOR<PoolCreateWithoutChainInput, PoolUncheckedCreateWithoutChainInput>
+  }
+
+  export type PoolCreateManyChainInputEnvelope = {
+    data: PoolCreateManyChainInput | PoolCreateManyChainInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TokenAddressUpsertWithWhereUniqueWithoutChainInput = {
+    where: TokenAddressWhereUniqueInput
+    update: XOR<TokenAddressUpdateWithoutChainInput, TokenAddressUncheckedUpdateWithoutChainInput>
+    create: XOR<TokenAddressCreateWithoutChainInput, TokenAddressUncheckedCreateWithoutChainInput>
+  }
+
+  export type TokenAddressUpdateWithWhereUniqueWithoutChainInput = {
+    where: TokenAddressWhereUniqueInput
+    data: XOR<TokenAddressUpdateWithoutChainInput, TokenAddressUncheckedUpdateWithoutChainInput>
+  }
+
+  export type TokenAddressUpdateManyWithWhereWithoutChainInput = {
+    where: TokenAddressScalarWhereInput
+    data: XOR<TokenAddressUpdateManyMutationInput, TokenAddressUncheckedUpdateManyWithoutChainInput>
+  }
+
+  export type PoolUpsertWithWhereUniqueWithoutChainInput = {
+    where: PoolWhereUniqueInput
+    update: XOR<PoolUpdateWithoutChainInput, PoolUncheckedUpdateWithoutChainInput>
+    create: XOR<PoolCreateWithoutChainInput, PoolUncheckedCreateWithoutChainInput>
+  }
+
+  export type PoolUpdateWithWhereUniqueWithoutChainInput = {
+    where: PoolWhereUniqueInput
+    data: XOR<PoolUpdateWithoutChainInput, PoolUncheckedUpdateWithoutChainInput>
+  }
+
+  export type PoolUpdateManyWithWhereWithoutChainInput = {
+    where: PoolScalarWhereInput
+    data: XOR<PoolUpdateManyMutationInput, PoolUncheckedUpdateManyWithoutChainInput>
+  }
+
+  export type ChainRefCreateWithoutPoolsInput = {
+    id: string
+    networkName?: string | null
+    tokenAddresses?: TokenAddressCreateNestedManyWithoutChainInput
+  }
+
+  export type ChainRefUncheckedCreateWithoutPoolsInput = {
+    id: string
+    networkName?: string | null
+    tokenAddresses?: TokenAddressUncheckedCreateNestedManyWithoutChainInput
+  }
+
+  export type ChainRefCreateOrConnectWithoutPoolsInput = {
+    where: ChainRefWhereUniqueInput
+    create: XOR<ChainRefCreateWithoutPoolsInput, ChainRefUncheckedCreateWithoutPoolsInput>
+  }
+
+  export type TokenAddressCreateWithoutPoolsAsToken0Input = {
+    tokenAddress: string
+    token: TokenCreateNestedOneWithoutAddressesInput
+    chain: ChainRefCreateNestedOneWithoutTokenAddressesInput
+    poolsAsToken1?: PoolCreateNestedManyWithoutToken1Input
+  }
+
+  export type TokenAddressUncheckedCreateWithoutPoolsAsToken0Input = {
+    tokenAddress: string
+    chainId: string
+    tokenId: string
+    poolsAsToken1?: PoolUncheckedCreateNestedManyWithoutToken1Input
+  }
+
+  export type TokenAddressCreateOrConnectWithoutPoolsAsToken0Input = {
+    where: TokenAddressWhereUniqueInput
+    create: XOR<TokenAddressCreateWithoutPoolsAsToken0Input, TokenAddressUncheckedCreateWithoutPoolsAsToken0Input>
+  }
+
+  export type TokenAddressCreateWithoutPoolsAsToken1Input = {
+    tokenAddress: string
+    token: TokenCreateNestedOneWithoutAddressesInput
+    chain: ChainRefCreateNestedOneWithoutTokenAddressesInput
+    poolsAsToken0?: PoolCreateNestedManyWithoutToken0Input
+  }
+
+  export type TokenAddressUncheckedCreateWithoutPoolsAsToken1Input = {
+    tokenAddress: string
+    chainId: string
+    tokenId: string
+    poolsAsToken0?: PoolUncheckedCreateNestedManyWithoutToken0Input
+  }
+
+  export type TokenAddressCreateOrConnectWithoutPoolsAsToken1Input = {
+    where: TokenAddressWhereUniqueInput
+    create: XOR<TokenAddressCreateWithoutPoolsAsToken1Input, TokenAddressUncheckedCreateWithoutPoolsAsToken1Input>
+  }
+
+  export type ChainRefUpsertWithoutPoolsInput = {
+    update: XOR<ChainRefUpdateWithoutPoolsInput, ChainRefUncheckedUpdateWithoutPoolsInput>
+    create: XOR<ChainRefCreateWithoutPoolsInput, ChainRefUncheckedCreateWithoutPoolsInput>
+    where?: ChainRefWhereInput
+  }
+
+  export type ChainRefUpdateToOneWithWhereWithoutPoolsInput = {
+    where?: ChainRefWhereInput
+    data: XOR<ChainRefUpdateWithoutPoolsInput, ChainRefUncheckedUpdateWithoutPoolsInput>
+  }
+
+  export type ChainRefUpdateWithoutPoolsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    networkName?: NullableStringFieldUpdateOperationsInput | string | null
+    tokenAddresses?: TokenAddressUpdateManyWithoutChainNestedInput
+  }
+
+  export type ChainRefUncheckedUpdateWithoutPoolsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    networkName?: NullableStringFieldUpdateOperationsInput | string | null
+    tokenAddresses?: TokenAddressUncheckedUpdateManyWithoutChainNestedInput
+  }
+
+  export type TokenAddressUpsertWithoutPoolsAsToken0Input = {
+    update: XOR<TokenAddressUpdateWithoutPoolsAsToken0Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken0Input>
+    create: XOR<TokenAddressCreateWithoutPoolsAsToken0Input, TokenAddressUncheckedCreateWithoutPoolsAsToken0Input>
+    where?: TokenAddressWhereInput
+  }
+
+  export type TokenAddressUpdateToOneWithWhereWithoutPoolsAsToken0Input = {
+    where?: TokenAddressWhereInput
+    data: XOR<TokenAddressUpdateWithoutPoolsAsToken0Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken0Input>
+  }
+
+  export type TokenAddressUpdateWithoutPoolsAsToken0Input = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+    token?: TokenUpdateOneRequiredWithoutAddressesNestedInput
+    chain?: ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput
+    poolsAsToken1?: PoolUpdateManyWithoutToken1NestedInput
+  }
+
+  export type TokenAddressUncheckedUpdateWithoutPoolsAsToken0Input = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+    chainId?: StringFieldUpdateOperationsInput | string
+    tokenId?: StringFieldUpdateOperationsInput | string
+    poolsAsToken1?: PoolUncheckedUpdateManyWithoutToken1NestedInput
+  }
+
+  export type TokenAddressUpsertWithoutPoolsAsToken1Input = {
+    update: XOR<TokenAddressUpdateWithoutPoolsAsToken1Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken1Input>
+    create: XOR<TokenAddressCreateWithoutPoolsAsToken1Input, TokenAddressUncheckedCreateWithoutPoolsAsToken1Input>
+    where?: TokenAddressWhereInput
+  }
+
+  export type TokenAddressUpdateToOneWithWhereWithoutPoolsAsToken1Input = {
+    where?: TokenAddressWhereInput
+    data: XOR<TokenAddressUpdateWithoutPoolsAsToken1Input, TokenAddressUncheckedUpdateWithoutPoolsAsToken1Input>
+  }
+
+  export type TokenAddressUpdateWithoutPoolsAsToken1Input = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+    token?: TokenUpdateOneRequiredWithoutAddressesNestedInput
+    chain?: ChainRefUpdateOneRequiredWithoutTokenAddressesNestedInput
+    poolsAsToken0?: PoolUpdateManyWithoutToken0NestedInput
+  }
+
+  export type TokenAddressUncheckedUpdateWithoutPoolsAsToken1Input = {
+    tokenAddress?: StringFieldUpdateOperationsInput | string
+    chainId?: StringFieldUpdateOperationsInput | string
+    tokenId?: StringFieldUpdateOperationsInput | string
+    poolsAsToken0?: PoolUncheckedUpdateManyWithoutToken0NestedInput
   }
 
   export type TokenAddressCreateManyTokenInput = {
@@ -7230,6 +7230,56 @@ export namespace Prisma {
   export type TokenAddressUncheckedUpdateManyWithoutTokenInput = {
     tokenAddress?: StringFieldUpdateOperationsInput | string
     chainId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PoolCreateManyToken0Input = {
+    poolAddress: string
+    token1Address: string
+    dexName: string
+  }
+
+  export type PoolCreateManyToken1Input = {
+    poolAddress: string
+    token0Address: string
+    dexName: string
+  }
+
+  export type PoolUpdateWithoutToken0Input = {
+    poolAddress?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
+    chain?: ChainRefUpdateOneRequiredWithoutPoolsNestedInput
+    token1?: TokenAddressUpdateOneRequiredWithoutPoolsAsToken1NestedInput
+  }
+
+  export type PoolUncheckedUpdateWithoutToken0Input = {
+    poolAddress?: StringFieldUpdateOperationsInput | string
+    token1Address?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PoolUncheckedUpdateManyWithoutToken0Input = {
+    poolAddress?: StringFieldUpdateOperationsInput | string
+    token1Address?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PoolUpdateWithoutToken1Input = {
+    poolAddress?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
+    chain?: ChainRefUpdateOneRequiredWithoutPoolsNestedInput
+    token0?: TokenAddressUpdateOneRequiredWithoutPoolsAsToken0NestedInput
+  }
+
+  export type PoolUncheckedUpdateWithoutToken1Input = {
+    poolAddress?: StringFieldUpdateOperationsInput | string
+    token0Address?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PoolUncheckedUpdateManyWithoutToken1Input = {
+    poolAddress?: StringFieldUpdateOperationsInput | string
+    token0Address?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
   }
 
   export type TokenAddressCreateManyChainInput = {
@@ -7281,56 +7331,6 @@ export namespace Prisma {
     poolAddress?: StringFieldUpdateOperationsInput | string
     token0Address?: StringFieldUpdateOperationsInput | string
     token1Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PoolCreateManyToken0Input = {
-    poolAddress: string
-    token1Address: string
-    dexName: string
-  }
-
-  export type PoolCreateManyToken1Input = {
-    poolAddress: string
-    token0Address: string
-    dexName: string
-  }
-
-  export type PoolUpdateWithoutToken0Input = {
-    poolAddress?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
-    chain?: ChainRefUpdateOneRequiredWithoutPoolsNestedInput
-    token1?: TokenAddressUpdateOneRequiredWithoutPoolsAsToken1NestedInput
-  }
-
-  export type PoolUncheckedUpdateWithoutToken0Input = {
-    poolAddress?: StringFieldUpdateOperationsInput | string
-    token1Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PoolUncheckedUpdateManyWithoutToken0Input = {
-    poolAddress?: StringFieldUpdateOperationsInput | string
-    token1Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PoolUpdateWithoutToken1Input = {
-    poolAddress?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
-    chain?: ChainRefUpdateOneRequiredWithoutPoolsNestedInput
-    token0?: TokenAddressUpdateOneRequiredWithoutPoolsAsToken0NestedInput
-  }
-
-  export type PoolUncheckedUpdateWithoutToken1Input = {
-    poolAddress?: StringFieldUpdateOperationsInput | string
-    token0Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PoolUncheckedUpdateManyWithoutToken1Input = {
-    poolAddress?: StringFieldUpdateOperationsInput | string
-    token0Address?: StringFieldUpdateOperationsInput | string
     dexName?: StringFieldUpdateOperationsInput | string
   }
 
