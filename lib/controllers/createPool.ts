@@ -19,9 +19,7 @@ async function createPool(prisma: PrismaClient, pool: pool, dexName: string, cha
   // @ts-ignore
   const chainId: number = chainref[chain];
   const chainIdString = chainId.toString();
-
-  console.log("Pool Information: ", pool);
-  
+    
   // Step 1: Get or create token0
   const token0 = await prisma.token.upsert({
     where: { tokenName: pool.Token0Name },

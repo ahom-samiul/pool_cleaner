@@ -1,28 +1,54 @@
 import { PrismaClient } from "./prisma/generated/prisma";
+import { readdir } from "node:fs/promises"
+import chain_extract from "./lib/utils/chain_extract";
+import poolAddressExists from "./lib/controllers/poolAddressExists";
+import dex_extract from "./lib/utils/dex_extract";
+import createPool from "./lib/controllers/createPool";
 
+// PrismaClient Instance
+const prisma = new PrismaClient();
 
+// Path to data dir 
+const datapath = "./data/"
 
-// {
-//         "PairAddress": "0xC53e453E4A6953887bf447162D1dC9E1e7f16f60",
-//         "Token0Name": "Wrapped Ether",
-//         "Token0Symbol": "WETH",
-//         "Token0Decimals": 18,
-//         "Token0Address": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-//         "Token0Reserve": "0.01781839836400572",
-//         "Token1Name": "USD Coin (Arb1)",
-//         "Token1Symbol": "USDC",
-//         "Token1Decimals": 6,
-//         "Token1Address": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8",
-//         "Token1Reserve": "32.166372"
-// }
+// Read dir contents
+const dircontents = await readdir(datapath, { recursive: true });
 
-const path = "./data/apeswap_arbitrum.json"
-const file = Bun.file(path);
+// cleanup file paths
+const files = dircontents
+  .filter((file): file is string => typeof file === 'string' && file.endsWith('.json'))
+  .map((file) => `${datapath}${file}`);
 
-const contents = await file.json(); 
+// For each of the files do the following.
+for (const filepath of files) {
+  // read the file, and extract the data and chain info.
+  const file = Bun.file(filepath);
+  const data = await file.json();
+  const chain = chain_extract(filepath) || "";
+  const dex = dex_extract(filepath) || "";
 
-const prisma = new PrismaClient(); 
+  // Log the current file and number of entries
+  console.log(`\nProcessing file: ${filepath}`);
+  console.log(`File contains ${data.length} pools`);
 
-contents.map((content: any) => {
-    console.log("This is the content:", content)
-})
+  // For each of the pools in the files, do the following.
+  for (let i = 0; i < data.length; i++) {
+    const pool = data[i];
+    console.log(`Processing pool ${i + 1}/${data.length}: ${pool.PairAddress}`);
+    
+    // Check if the pool address already exists in the database.
+    const exists = await poolAddressExists(prisma, pool.PairAddress);
+
+    // If the pool address already exists in the database, then continue;
+    if (exists) {
+      console.log(`Pool already exists: ${pool.PairAddress}`);
+      continue;
+    }
+
+    // If the pool address doesn't exist, then create everything. 
+    const res = await createPool(prisma, pool, dex, chain);
+    console.log(`Pool created: ${pool.PairAddress}`);
+
+  }
+  console.log(`Completed processing file: ${filepath}`);
+}
