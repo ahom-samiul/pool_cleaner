@@ -141,9 +141,9 @@ exports.Prisma.ChainRefScalarFieldEnum = {
 
 exports.Prisma.PoolScalarFieldEnum = {
   poolAddress: 'poolAddress',
+  dexName: 'dexName',
   token0Address: 'token0Address',
   token1Address: 'token1Address',
-  dexName: 'dexName',
   chainId: 'chainId'
 };
 

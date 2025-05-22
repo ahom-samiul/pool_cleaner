@@ -4525,25 +4525,25 @@ export namespace Prisma {
 
   export type PoolMinAggregateOutputType = {
     poolAddress: string | null
+    dexName: string | null
     token0Address: string | null
     token1Address: string | null
-    dexName: string | null
     chainId: string | null
   }
 
   export type PoolMaxAggregateOutputType = {
     poolAddress: string | null
+    dexName: string | null
     token0Address: string | null
     token1Address: string | null
-    dexName: string | null
     chainId: string | null
   }
 
   export type PoolCountAggregateOutputType = {
     poolAddress: number
+    dexName: number
     token0Address: number
     token1Address: number
-    dexName: number
     chainId: number
     _all: number
   }
@@ -4551,25 +4551,25 @@ export namespace Prisma {
 
   export type PoolMinAggregateInputType = {
     poolAddress?: true
+    dexName?: true
     token0Address?: true
     token1Address?: true
-    dexName?: true
     chainId?: true
   }
 
   export type PoolMaxAggregateInputType = {
     poolAddress?: true
+    dexName?: true
     token0Address?: true
     token1Address?: true
-    dexName?: true
     chainId?: true
   }
 
   export type PoolCountAggregateInputType = {
     poolAddress?: true
+    dexName?: true
     token0Address?: true
     token1Address?: true
-    dexName?: true
     chainId?: true
     _all?: true
   }
@@ -4648,9 +4648,9 @@ export namespace Prisma {
 
   export type PoolGroupByOutputType = {
     poolAddress: string
+    dexName: string
     token0Address: string
     token1Address: string
-    dexName: string
     chainId: string
     _count: PoolCountAggregateOutputType | null
     _min: PoolMinAggregateOutputType | null
@@ -4673,9 +4673,9 @@ export namespace Prisma {
 
   export type PoolSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     poolAddress?: boolean
+    dexName?: boolean
     token0Address?: boolean
     token1Address?: boolean
-    dexName?: boolean
     chainId?: boolean
     chain?: boolean | ChainRefDefaultArgs<ExtArgs>
     token0?: boolean | TokenAddressDefaultArgs<ExtArgs>
@@ -4684,9 +4684,9 @@ export namespace Prisma {
 
   export type PoolSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     poolAddress?: boolean
+    dexName?: boolean
     token0Address?: boolean
     token1Address?: boolean
-    dexName?: boolean
     chainId?: boolean
     chain?: boolean | ChainRefDefaultArgs<ExtArgs>
     token0?: boolean | TokenAddressDefaultArgs<ExtArgs>
@@ -4695,9 +4695,9 @@ export namespace Prisma {
 
   export type PoolSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     poolAddress?: boolean
+    dexName?: boolean
     token0Address?: boolean
     token1Address?: boolean
-    dexName?: boolean
     chainId?: boolean
     chain?: boolean | ChainRefDefaultArgs<ExtArgs>
     token0?: boolean | TokenAddressDefaultArgs<ExtArgs>
@@ -4706,13 +4706,13 @@ export namespace Prisma {
 
   export type PoolSelectScalar = {
     poolAddress?: boolean
+    dexName?: boolean
     token0Address?: boolean
     token1Address?: boolean
-    dexName?: boolean
     chainId?: boolean
   }
 
-  export type PoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"poolAddress" | "token0Address" | "token1Address" | "dexName" | "chainId", ExtArgs["result"]["pool"]>
+  export type PoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"poolAddress" | "dexName" | "token0Address" | "token1Address" | "chainId", ExtArgs["result"]["pool"]>
   export type PoolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chain?: boolean | ChainRefDefaultArgs<ExtArgs>
     token0?: boolean | TokenAddressDefaultArgs<ExtArgs>
@@ -4738,9 +4738,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       poolAddress: string
+      dexName: string
       token0Address: string
       token1Address: string
-      dexName: string
       chainId: string
     }, ExtArgs["result"]["pool"]>
     composites: {}
@@ -5169,9 +5169,9 @@ export namespace Prisma {
    */
   interface PoolFieldRefs {
     readonly poolAddress: FieldRef<"Pool", 'String'>
+    readonly dexName: FieldRef<"Pool", 'String'>
     readonly token0Address: FieldRef<"Pool", 'String'>
     readonly token1Address: FieldRef<"Pool", 'String'>
-    readonly dexName: FieldRef<"Pool", 'String'>
     readonly chainId: FieldRef<"Pool", 'String'>
   }
     
@@ -5631,9 +5631,9 @@ export namespace Prisma {
 
   export const PoolScalarFieldEnum: {
     poolAddress: 'poolAddress',
+    dexName: 'dexName',
     token0Address: 'token0Address',
     token1Address: 'token1Address',
-    dexName: 'dexName',
     chainId: 'chainId'
   };
 
@@ -5795,18 +5795,18 @@ export namespace Prisma {
   }
 
   export type TokenAddressWhereUniqueInput = Prisma.AtLeast<{
+    tokenAddress?: string
     tokenAddress_chainId?: TokenAddressTokenAddressChainIdCompoundUniqueInput
     AND?: TokenAddressWhereInput | TokenAddressWhereInput[]
     OR?: TokenAddressWhereInput[]
     NOT?: TokenAddressWhereInput | TokenAddressWhereInput[]
-    tokenAddress?: StringFilter<"TokenAddress"> | string
     chainId?: StringFilter<"TokenAddress"> | string
     tokenId?: StringFilter<"TokenAddress"> | string
     token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
     chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
     poolsAsToken0?: PoolListRelationFilter
     poolsAsToken1?: PoolListRelationFilter
-  }, "tokenAddress_chainId">
+  }, "tokenAddress_chainId" | "tokenAddress">
 
   export type TokenAddressOrderByWithAggregationInput = {
     tokenAddress?: SortOrder
@@ -5874,9 +5874,9 @@ export namespace Prisma {
     OR?: PoolWhereInput[]
     NOT?: PoolWhereInput | PoolWhereInput[]
     poolAddress?: StringFilter<"Pool"> | string
+    dexName?: StringFilter<"Pool"> | string
     token0Address?: StringFilter<"Pool"> | string
     token1Address?: StringFilter<"Pool"> | string
-    dexName?: StringFilter<"Pool"> | string
     chainId?: StringFilter<"Pool"> | string
     chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
     token0?: XOR<TokenAddressScalarRelationFilter, TokenAddressWhereInput>
@@ -5885,9 +5885,9 @@ export namespace Prisma {
 
   export type PoolOrderByWithRelationInput = {
     poolAddress?: SortOrder
+    dexName?: SortOrder
     token0Address?: SortOrder
     token1Address?: SortOrder
-    dexName?: SortOrder
     chainId?: SortOrder
     chain?: ChainRefOrderByWithRelationInput
     token0?: TokenAddressOrderByWithRelationInput
@@ -5900,9 +5900,9 @@ export namespace Prisma {
     AND?: PoolWhereInput | PoolWhereInput[]
     OR?: PoolWhereInput[]
     NOT?: PoolWhereInput | PoolWhereInput[]
+    dexName?: StringFilter<"Pool"> | string
     token0Address?: StringFilter<"Pool"> | string
     token1Address?: StringFilter<"Pool"> | string
-    dexName?: StringFilter<"Pool"> | string
     chainId?: StringFilter<"Pool"> | string
     chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
     token0?: XOR<TokenAddressScalarRelationFilter, TokenAddressWhereInput>
@@ -5911,9 +5911,9 @@ export namespace Prisma {
 
   export type PoolOrderByWithAggregationInput = {
     poolAddress?: SortOrder
+    dexName?: SortOrder
     token0Address?: SortOrder
     token1Address?: SortOrder
-    dexName?: SortOrder
     chainId?: SortOrder
     _count?: PoolCountOrderByAggregateInput
     _max?: PoolMaxOrderByAggregateInput
@@ -5925,9 +5925,9 @@ export namespace Prisma {
     OR?: PoolScalarWhereWithAggregatesInput[]
     NOT?: PoolScalarWhereWithAggregatesInput | PoolScalarWhereWithAggregatesInput[]
     poolAddress?: StringWithAggregatesFilter<"Pool"> | string
+    dexName?: StringWithAggregatesFilter<"Pool"> | string
     token0Address?: StringWithAggregatesFilter<"Pool"> | string
     token1Address?: StringWithAggregatesFilter<"Pool"> | string
-    dexName?: StringWithAggregatesFilter<"Pool"> | string
     chainId?: StringWithAggregatesFilter<"Pool"> | string
   }
 
@@ -6092,9 +6092,9 @@ export namespace Prisma {
 
   export type PoolUncheckedCreateInput = {
     poolAddress: string
+    dexName: string
     token0Address: string
     token1Address: string
-    dexName: string
     chainId: string
   }
 
@@ -6108,17 +6108,17 @@ export namespace Prisma {
 
   export type PoolUncheckedUpdateInput = {
     poolAddress?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
     token0Address?: StringFieldUpdateOperationsInput | string
     token1Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
     chainId?: StringFieldUpdateOperationsInput | string
   }
 
   export type PoolCreateManyInput = {
     poolAddress: string
+    dexName: string
     token0Address: string
     token1Address: string
-    dexName: string
     chainId: string
   }
 
@@ -6129,9 +6129,9 @@ export namespace Prisma {
 
   export type PoolUncheckedUpdateManyInput = {
     poolAddress?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
     token0Address?: StringFieldUpdateOperationsInput | string
     token1Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
     chainId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6345,25 +6345,25 @@ export namespace Prisma {
 
   export type PoolCountOrderByAggregateInput = {
     poolAddress?: SortOrder
+    dexName?: SortOrder
     token0Address?: SortOrder
     token1Address?: SortOrder
-    dexName?: SortOrder
     chainId?: SortOrder
   }
 
   export type PoolMaxOrderByAggregateInput = {
     poolAddress?: SortOrder
+    dexName?: SortOrder
     token0Address?: SortOrder
     token1Address?: SortOrder
-    dexName?: SortOrder
     chainId?: SortOrder
   }
 
   export type PoolMinOrderByAggregateInput = {
     poolAddress?: SortOrder
+    dexName?: SortOrder
     token0Address?: SortOrder
     token1Address?: SortOrder
-    dexName?: SortOrder
     chainId?: SortOrder
   }
 
@@ -6870,8 +6870,8 @@ export namespace Prisma {
 
   export type PoolUncheckedCreateWithoutToken0Input = {
     poolAddress: string
-    token1Address: string
     dexName: string
+    token1Address: string
   }
 
   export type PoolCreateOrConnectWithoutToken0Input = {
@@ -6893,8 +6893,8 @@ export namespace Prisma {
 
   export type PoolUncheckedCreateWithoutToken1Input = {
     poolAddress: string
-    token0Address: string
     dexName: string
+    token0Address: string
   }
 
   export type PoolCreateOrConnectWithoutToken1Input = {
@@ -6978,9 +6978,9 @@ export namespace Prisma {
     OR?: PoolScalarWhereInput[]
     NOT?: PoolScalarWhereInput | PoolScalarWhereInput[]
     poolAddress?: StringFilter<"Pool"> | string
+    dexName?: StringFilter<"Pool"> | string
     token0Address?: StringFilter<"Pool"> | string
     token1Address?: StringFilter<"Pool"> | string
-    dexName?: StringFilter<"Pool"> | string
     chainId?: StringFilter<"Pool"> | string
   }
 
@@ -7033,9 +7033,9 @@ export namespace Prisma {
 
   export type PoolUncheckedCreateWithoutChainInput = {
     poolAddress: string
+    dexName: string
     token0Address: string
     token1Address: string
-    dexName: string
   }
 
   export type PoolCreateOrConnectWithoutChainInput = {
@@ -7234,14 +7234,14 @@ export namespace Prisma {
 
   export type PoolCreateManyToken0Input = {
     poolAddress: string
-    token1Address: string
     dexName: string
+    token1Address: string
   }
 
   export type PoolCreateManyToken1Input = {
     poolAddress: string
-    token0Address: string
     dexName: string
+    token0Address: string
   }
 
   export type PoolUpdateWithoutToken0Input = {
@@ -7253,14 +7253,14 @@ export namespace Prisma {
 
   export type PoolUncheckedUpdateWithoutToken0Input = {
     poolAddress?: StringFieldUpdateOperationsInput | string
-    token1Address?: StringFieldUpdateOperationsInput | string
     dexName?: StringFieldUpdateOperationsInput | string
+    token1Address?: StringFieldUpdateOperationsInput | string
   }
 
   export type PoolUncheckedUpdateManyWithoutToken0Input = {
     poolAddress?: StringFieldUpdateOperationsInput | string
-    token1Address?: StringFieldUpdateOperationsInput | string
     dexName?: StringFieldUpdateOperationsInput | string
+    token1Address?: StringFieldUpdateOperationsInput | string
   }
 
   export type PoolUpdateWithoutToken1Input = {
@@ -7272,14 +7272,14 @@ export namespace Prisma {
 
   export type PoolUncheckedUpdateWithoutToken1Input = {
     poolAddress?: StringFieldUpdateOperationsInput | string
-    token0Address?: StringFieldUpdateOperationsInput | string
     dexName?: StringFieldUpdateOperationsInput | string
+    token0Address?: StringFieldUpdateOperationsInput | string
   }
 
   export type PoolUncheckedUpdateManyWithoutToken1Input = {
     poolAddress?: StringFieldUpdateOperationsInput | string
-    token0Address?: StringFieldUpdateOperationsInput | string
     dexName?: StringFieldUpdateOperationsInput | string
+    token0Address?: StringFieldUpdateOperationsInput | string
   }
 
   export type TokenAddressCreateManyChainInput = {
@@ -7289,9 +7289,9 @@ export namespace Prisma {
 
   export type PoolCreateManyChainInput = {
     poolAddress: string
+    dexName: string
     token0Address: string
     token1Address: string
-    dexName: string
   }
 
   export type TokenAddressUpdateWithoutChainInput = {
@@ -7322,16 +7322,16 @@ export namespace Prisma {
 
   export type PoolUncheckedUpdateWithoutChainInput = {
     poolAddress?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
     token0Address?: StringFieldUpdateOperationsInput | string
     token1Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
   }
 
   export type PoolUncheckedUpdateManyWithoutChainInput = {
     poolAddress?: StringFieldUpdateOperationsInput | string
+    dexName?: StringFieldUpdateOperationsInput | string
     token0Address?: StringFieldUpdateOperationsInput | string
     token1Address?: StringFieldUpdateOperationsInput | string
-    dexName?: StringFieldUpdateOperationsInput | string
   }
 
 

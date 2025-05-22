@@ -24,7 +24,7 @@ model Token {
 }
 
 model TokenAddress {
-  tokenAddress String
+  tokenAddress String @unique
   chainId      String
   tokenId      String
 
@@ -47,9 +47,9 @@ model ChainRef {
 
 model Pool {
   poolAddress   String @unique
+  dexName       String
   token0Address String
   token1Address String
-  dexName       String
   chainId       String
 
   chain  ChainRef     @relation(fields: [chainId], references: [id])
