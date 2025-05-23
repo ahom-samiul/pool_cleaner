@@ -11,11 +11,12 @@ interface WorkerMessage {
     data: any[];
     dex: string;
     chain: string; 
+    windex: number; 
 }
 
 // Function to handle the creation of pools in chunks
 self.onmessage = async (event: MessageEvent<WorkerMessage>) => {
-    const { type, chunkId, data, dex, chain } = event.data;
+    const { type, chunkId, data, dex, chain, windex } = event.data;
 
     if(type === "START") {
         try {
@@ -30,24 +31,24 @@ self.onmessage = async (event: MessageEvent<WorkerMessage>) => {
                 });
 
                 if(exists) {
-                    console.log("Pool already exists", pool.PairAddress);
+                    console.log(`Worker ${windex}`,"Pool already exists", pool.PairAddress);
                     continue;
                 }
 
                 if(!exists) {
-                    console.log("Pool does not exist! Creating....", pool.PairAddress);
+                    console.log(`Worker ${windex}`, "Pool does not exist! Creating....", pool.PairAddress);
                 }
 
                 // If the pool address doesn't exist, then create everything.
                 let result = await createPool(prisma, pool, dex, chain);
 
                 if(!result) {
-                    console.log("Pool creation failed", pool.PairAddress);
+                    console.log(`Worker ${windex}`, "Pool creation failed", pool.PairAddress);
                     continue;
                 }
 
                 // If the pool creation was successful, then log the result.
-                console.log("Pool created successfully: ", result.poolAddress);
+                console.log(`Worker ${windex}`, "Pool created successfully: ", result.poolAddress);
             }
             
             // Send a message back to the main thread indicating completion

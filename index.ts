@@ -71,7 +71,7 @@ async function handleFile (filepath: string): Promise<{ success: boolean, messag
     console.log("Chunk Size: ", CHUNK_SIZE)
 
     // Handle results
-    workers.forEach(worker => {
+    workers.forEach((worker) => {
       worker.onmessage = (event) => {
         const { type, chunkId, success, error } = event.data;
         
@@ -117,6 +117,7 @@ async function handleFile (filepath: string): Promise<{ success: boolean, messag
         data: chunk,
         dex: dex,
         chain: chain,
+        windex: workerIndex
       });
     });
   });
