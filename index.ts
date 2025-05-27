@@ -27,7 +27,7 @@ function chunkArray (arr: any[], chunkSize: number): any[][] {
 
 
 // Worker count and pool.
-const WORKER_COUNT = 5;
+const WORKER_COUNT = 10;
 
 
 for(let filepath of files) {

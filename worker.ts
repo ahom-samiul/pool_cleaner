@@ -60,7 +60,7 @@ self.onmessage = async (event: MessageEvent<WorkerMessage>) => {
             });
             
         } catch (error: unknown) {
-            console.log("something went wrong in the woker", error); 
+            console.log(`Worker ${windex}`, "something went wrong in the Worker", error); 
 
             self.postMessage({
                 type: "BATCH_COMPLETE",
