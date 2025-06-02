@@ -18,7 +18,12 @@ const files = dircontents
 
 // Function to chunk an Array into smaller arrays of a specified size.
 function chunkArray (arr: any[], chunkSize: number): any[][] {
+  if (arr.length <= 100) {
+    return [arr]; // If the array is small enough, return it as a single chunk.
+  }
+
   const result: any[][] = [];
+
   for (let i = 0; i < arr.length; i += chunkSize) {
     result.push(arr.slice(i, i + chunkSize));
   }

@@ -20,85 +20,86 @@ async function createPool(prisma: PrismaClient, pool: pool, dexName: string, cha
   const chainId: number = chainref[chain];
   const chainIdString = chainId.toString();
   
-  // Step 1: Run independent operations in parallel
-  const [token0, token1, chainRef] = await Promise.all([
-    // Get or create token0
-    prisma.token.upsert({
-      where: { tokenName: pool.Token0Name },
-      update: {},
-      create: {
-        tokenName: pool.Token0Name,
-        tokenSymbol: pool.Token0Symbol,
-        tokenDecimals: pool.Token0Decimals,
-        logoUrl: null
-      }
-    }),
+    // Step 1: Run independent operations in parallel
+    const [token0, token1, chainRef] = await Promise.all([
+      // Get or create token0
+      prisma.token.upsert({
+        where: { tokenName: pool.Token0Name },
+        update: {},
+        create: {
+          tokenName: pool.Token0Name,
+          tokenSymbol: pool.Token0Symbol,
+          tokenDecimals: pool.Token0Decimals,
+          logoUrl: null
+        }
+      }),
+      
+      // Get or create token1
+      prisma.token.upsert({
+        where: { tokenName: pool.Token1Name },
+        update: {},
+        create: {
+          tokenName: pool.Token1Name,
+          tokenSymbol: pool.Token1Symbol,
+          tokenDecimals: pool.Token1Decimals,
+          logoUrl: null
+        }
+      }),
+      
+      // Get or create ChainRef
+      prisma.chainRef.upsert({
+        where: { id: chainIdString },
+        update: {},
+        create: { id: chainIdString, networkName: chain }
+      })
+    ]);
     
-    // Get or create token1
-    prisma.token.upsert({
-      where: { tokenName: pool.Token1Name },
-      update: {},
-      create: {
-        tokenName: pool.Token1Name,
-        tokenSymbol: pool.Token1Symbol,
-        tokenDecimals: pool.Token1Decimals,
-        logoUrl: null
-      }
-    }),
-    
-    // Get or create ChainRef
-    prisma.chainRef.upsert({
-      where: { id: chainIdString },
-      update: {},
-      create: { id: chainIdString, networkName: chain }
-    })
-  ]);
-  
-  // Step 2: Create token addresses in parallel (they depend on token IDs from step 1)
-  await Promise.all([
-    prisma.tokenAddress.upsert({
-      where: {
-        tokenAddress_chainId: {
+    // Step 2: Create token addresses in parallel (they depend on token IDs from step 1)
+    await Promise.all([
+      prisma.tokenAddress.upsert({
+        where: {
+          tokenAddress_chainId: {
+            tokenAddress: pool.Token0Address,
+            chainId: chainIdString
+          }
+        },
+        update: {},
+        create: {
           tokenAddress: pool.Token0Address,
-          chainId: chainIdString
+          chainId: chainIdString,
+          tokenId: token0.id
         }
-      },
-      update: {},
-      create: {
-        tokenAddress: pool.Token0Address,
-        chainId: chainIdString,
-        tokenId: token0.id
-      }
-    }),
-    
-    prisma.tokenAddress.upsert({
-      where: {
-        tokenAddress_chainId: {
+      }),
+      
+      prisma.tokenAddress.upsert({
+        where: {
+          tokenAddress_chainId: {
+            tokenAddress: pool.Token1Address,
+            chainId: chainIdString
+          }
+        },
+        update: {},
+        create: {
           tokenAddress: pool.Token1Address,
-          chainId: chainIdString
+          chainId: chainIdString,
+          tokenId: token1.id
         }
-      },
-      update: {},
-      create: {
-        tokenAddress: pool.Token1Address,
-        chainId: chainIdString,
-        tokenId: token1.id
+      })
+    ]);
+    
+    // Step 3: Create the pool (depends on previous steps)
+    const res = await prisma.pool.create({
+      data: {
+        poolAddress: pool.PairAddress,
+        dexName: dexName,
+        token0Address: pool.Token0Address,
+        token1Address: pool.Token1Address,
+        chainId: chainIdString
       }
-    })
-  ]);
-  
-  // Step 3: Create the pool (depends on previous steps)
-  const res = await prisma.pool.create({
-    data: {
-      poolAddress: pool.PairAddress,
-      dexName: dexName,
-      token0Address: pool.Token0Address,
-      token1Address: pool.Token1Address,
-      chainId: chainIdString
-    }
-  });
-  
-  return res;
-}
+    });
+    
+    return res;
+  };
+
 
 export default createPool;
