@@ -19,7 +19,6 @@ async function createPool(prisma: PrismaClient, pool: pool, dexName: string, cha
   // @ts-ignore
   const chainId: number = chainref[chain];
   const chainIdString = chainId.toString();
-  
     // Step 1: Run independent operations in parallel
     const [token0, token1, chainRef] = await Promise.all([
       // Get or create token0
