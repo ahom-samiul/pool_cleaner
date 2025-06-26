@@ -43,7 +43,7 @@ self.onmessage = async (event: MessageEvent<WorkerMessage>) => {
                 let result = await createPool(prisma, pool, dex, chain);
 
                 if(!result) {
-                    console.log(`Worker ${windex}`, "Pool creation failed", pool.PairAddress);
+                    console.log(`Worker ${windex}`, "Pool creation failed!: ", pool.PairAddress);
                     continue;
                 }
 

@@ -16,9 +16,12 @@ interface pool {
 }
 
 async function createPool(prisma: PrismaClient, pool: pool, dexName: string, chain: string) {
-  // @ts-ignore
-  const chainId: number = chainref[chain];
-  const chainIdString = chainId.toString();
+
+  try {
+
+    // @ts-ignore
+    const chainId: number = chainref[chain];
+    const chainIdString = chainId.toString();
     // Step 1: Run independent operations in parallel
     const [token0, token1, chainRef] = await Promise.all([
       // Get or create token0
@@ -98,7 +101,11 @@ async function createPool(prisma: PrismaClient, pool: pool, dexName: string, cha
     });
     
     return res;
+  } catch(err) {
+    // console.log(`Something went wrong while creating the pool! ${pool.PairAddress}`)
+    return false;
+  }
   };
-
-
-export default createPool;
+  
+  
+  export default createPool;
