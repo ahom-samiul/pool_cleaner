@@ -6,7 +6,7 @@ import { join, extname, basename } from 'path';
 const INPUT_DIR = process.argv[2] || './excel-files';
 const OUTPUT_DIR = process.argv[3] || './json-output';
 
-function convertExcelToJson(inputDir: any, outputDir: any) {
+function convertExcelToJson(inputDir: any, outputDir:any) {
     // Create output directory if it doesn't exist
     if (!existsSync(outputDir)) {
         mkdirSync(outputDir, { recursive: true });
@@ -33,11 +33,16 @@ function convertExcelToJson(inputDir: any, outputDir: any) {
         const fileBaseName = basename(filename, extname(filename));
         
         try {
-            // Read the Excel file
-            const workbook = XLSX.readFile(filePath);
-            const sheetNames = workbook.SheetNames;
+            console.log(`   📏 File size: ${(statSync(filePath).size / 1024 / 1024).toFixed(2)} MB`);
             
-            console.log(`   Found ${sheetNames.length} sheet(s): ${sheetNames.join(', ')}`);
+            // First, just get sheet names without loading full content
+            const workbook = XLSX.readFile(filePath, { 
+                bookSheets: true,
+                bookProps: true
+            });
+            
+            const sheetNames = workbook.SheetNames;
+            console.log(`   🔍 Found ${sheetNames.length} sheet(s): ${sheetNames.join(', ')}`);
             
             // Create subdirectory for this Excel file
             const fileOutputDir = join(outputDir, fileBaseName);
@@ -45,21 +50,52 @@ function convertExcelToJson(inputDir: any, outputDir: any) {
                 mkdirSync(fileOutputDir, { recursive: true });
             }
             
-            // Convert each sheet to JSON
-            sheetNames.forEach(sheetName => {
-                const worksheet = workbook.Sheets[sheetName];
-                // @ts-ignore
-                const jsonData = XLSX.utils.sheet_to_json(worksheet);
-                
-                // Clean sheet name for filename
-                const cleanSheetName = sheetName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-                const jsonFilename = `${cleanSheetName}.json`;
-                const jsonFilePath = join(fileOutputDir, jsonFilename);
-                
-                // Save JSON file
-                writeFileSync(jsonFilePath, JSON.stringify(jsonData, null, 2));
-                
-                console.log(`   ✅ ${sheetName} -> ${jsonFilename} (${jsonData.length} rows)`);
+            // Process each sheet individually to avoid memory issues
+            sheetNames.forEach((sheetName, index) => {
+                try {
+                    console.log(`   📄 Processing sheet ${index + 1}/${sheetNames.length}: "${sheetName}"`);
+                    
+                    // Read only this specific sheet
+                    const sheetWorkbook = XLSX.readFile(filePath, {
+                        sheets: [sheetName],
+                        cellStyles: false,
+                        cellFormula: false,
+                        sheetStubs: false
+                    });
+                    
+                    const worksheet = sheetWorkbook.Sheets[sheetName];
+                    
+                    if (!worksheet) {
+                        console.log(`   ⚠️  Sheet "${sheetName}" not found, skipping...`);
+                        return;
+                    }
+                    
+                    // Check if sheet has data
+                    if (worksheet['!ref']) {
+                        const range = XLSX.utils.decode_range(worksheet['!ref']);
+                        const rowCount = range.e.r - range.s.r + 1;
+                        const colCount = range.e.c - range.s.c + 1;
+                        console.log(`   📊 Range: ${worksheet['!ref']} (${rowCount} rows, ${colCount} cols)`);
+                    }
+                    
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, {
+                        defval: null,
+                        blankrows: false
+                    });
+                    
+                    // Clean sheet name for filename
+                    const cleanSheetName = sheetName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+                    const jsonFilename = `${cleanSheetName}.json`;
+                    const jsonFilePath = join(fileOutputDir, jsonFilename);
+                    
+                    // Save JSON file
+                    writeFileSync(jsonFilePath, JSON.stringify(jsonData, null, 2));
+                    
+                    console.log(`   ✅ ${sheetName} -> ${jsonFilename} (${jsonData.length} rows)`);
+                    
+                } catch (sheetError: any) {
+                    console.error(`   ❌ Error processing sheet "${sheetName}":`, sheetError.message);
+                }
             });
             
             console.log(`   📁 Saved to: ${fileOutputDir}\n`);
