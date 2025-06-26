@@ -4,6 +4,7 @@ const chainref = {
     aurora: 1313161554,
     avalanche: 43114,
     base: 8453,
+    blast: 81457,
     bsc: 56,
     celo: 42220,
     cronos: 25,
@@ -24,8 +25,10 @@ const chainref = {
     moonbeam: 1284,
     optimism: 10,
     polygon: 137,
+    worldchain: 480,
     zetachain: 7000,
     zksync: 324,
+    zora: 7777777,
 };
 
 export default chainref;
