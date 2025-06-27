@@ -14,5 +14,8 @@
     "chalk": "^5.4.1",
     "prisma": "^6.10.1",
     "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "bun index.ts"
   }
 }
