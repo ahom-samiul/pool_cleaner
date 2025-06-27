@@ -10,9 +10,9 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@prisma/client": "^6.8.2",
+    "@prisma/client": "^6.10.1",
     "chalk": "^5.4.1",
-    "prisma": "^6.8.2",
+    "prisma": "^6.10.1",
     "xlsx": "^0.18.5"
   }
 }

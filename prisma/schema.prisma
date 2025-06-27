@@ -25,7 +25,7 @@ model Token {
 }
 
 model TokenAddress {
-  tokenAddress String         @unique
+  tokenAddress String         //@unique
   chainId      String
   tokenId      String
   

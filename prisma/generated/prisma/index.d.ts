@@ -256,8 +256,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.10.1
+   * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
    */
   export type PrismaVersion = {
     client: string
@@ -5795,18 +5795,18 @@ export namespace Prisma {
   }
 
   export type TokenAddressWhereUniqueInput = Prisma.AtLeast<{
-    tokenAddress?: string
     tokenAddress_chainId?: TokenAddressTokenAddressChainIdCompoundUniqueInput
     AND?: TokenAddressWhereInput | TokenAddressWhereInput[]
     OR?: TokenAddressWhereInput[]
     NOT?: TokenAddressWhereInput | TokenAddressWhereInput[]
+    tokenAddress?: StringFilter<"TokenAddress"> | string
     chainId?: StringFilter<"TokenAddress"> | string
     tokenId?: StringFilter<"TokenAddress"> | string
     token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
     chain?: XOR<ChainRefScalarRelationFilter, ChainRefWhereInput>
     poolsAsToken0?: PoolListRelationFilter
     poolsAsToken1?: PoolListRelationFilter
-  }, "tokenAddress_chainId" | "tokenAddress">
+  }, "tokenAddress_chainId">
 
   export type TokenAddressOrderByWithAggregationInput = {
     tokenAddress?: SortOrder

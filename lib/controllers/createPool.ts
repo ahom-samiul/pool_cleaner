@@ -1,5 +1,6 @@
 import { PrismaClient } from "../../prisma/generated/prisma";
 import chainref from "../constants/chainref";
+import chalk from "chalk";
 
 interface pool {
   PairAddress: string,
@@ -102,7 +103,7 @@ async function createPool(prisma: PrismaClient, pool: pool, dexName: string, cha
     
     return res;
   } catch(err) {
-    // console.log(`Something went wrong while creating the pool! ${pool.PairAddress}`)
+    console.log(chalk.red("Error creating pool:"), chalk.yellow(err instanceof Error ? err.message : String(err)));
     return false;
   }
   };
